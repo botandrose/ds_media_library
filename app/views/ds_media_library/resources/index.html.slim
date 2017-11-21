@@ -1,0 +1,28 @@
+= content_for :breadcrumbs do
+  ul.breadcrumb-nav
+    li Media Library
+
+= form_tag nil, method: :put do
+  input type="checkbox" id="select-media"
+  .table-buttons-flex
+    .buttons-left
+      = link_to "Open all folders", "#", class: "open-all-label", data: { "toggle-all-checkboxes" => ".expand-input" }
+      label.select-media-button for="select-media" Select multiple media
+      .field.move-selected
+        label.move-selected-label for="folder_id" Move selected to:
+        select#folder_id name="folder_id"
+          - folders.each do |folder|
+            option value=folder.id
+              = "- " * folder.depth
+              = folder.name
+        button.move-button Move
+
+    .buttons-right
+      = link_to "Add new folder", [:new, :folder], class: "add-button"
+      = link_to "Add new media", [:new, :resource], class: "add-button"
+
+  input.text#search_media type="text" placeholder="Type keywords to search media (case sensitive)"
+  ul.media-nav
+    = render collection: root.children, partial: "ds_media_library/resources/folder"
+    = render collection: root.resources, partial: "ds_media_library/resources/resource"
+

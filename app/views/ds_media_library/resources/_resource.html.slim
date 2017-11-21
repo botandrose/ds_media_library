@@ -1,0 +1,12 @@
+li.resource class=("hidden" if resource.hidden?)
+  .media-container
+    input.move-input type="checkbox" name="resource_ids[]" id="media-#{resource.id}" value=resource.id
+    label.expand-label for="media-#{resource.id}"
+      = link_to resource.original_file_name, edit_resource_path(resource), class: ["media-link", resource.expired? ? "expired" : ""], alt: resource.original_file_name
+      span.move-span.media-link alt=resource.original_file_name = resource.original_file_name
+
+    .media-links
+      = link_to "Edit media", edit_resource_path(resource), class: "edit-icon", title: "Edit media"
+      = link_to "Delete media", resource_path(resource), method: :delete, class: "delete-icon", title: "Delete media",
+        data: { confirm: "Are you sure you want to delete this media item? Note that this will just remove it from the media library." }
+

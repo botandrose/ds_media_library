@@ -1,0 +1,28 @@
+= content_for :breadcrumbs do
+  ul.breadcrumb-nav
+    li = link_to "Media Library", :root
+    li
+      = resource.new_record? ? "New" : "Edit"
+      |  media
+
+
+= form_for resource, url: resource.new_record? ? resources_path : resource_path(resource) do |form|
+  fieldset
+    .flex
+      .field
+        .field
+          = form.label :folder_id, "Parent folder", class: "optional"
+          = form.collection_select :folder_id, DSMediaLibrary::Folder.all, :id, :name, include_blank: " -- none -- "
+        .field
+          = form.label :expires_at, "Expiration date", class: "optional"
+          = form.date_field :expires_at
+          .warning-text Expired media items will appear with a <i class="fa fa-exclamation-triangle"></i> icon in the media library and an email will be sent upon expiration as a reminder to update it.
+
+      .field
+        = form.label :file, "Upload media"
+        = form.file_field :file, multiple: resource.new_record?
+        - unless form.object.new_record?
+          = render "shared/image_preview", image: form.object
+
+  = render "shared/submit", name: "media"
+

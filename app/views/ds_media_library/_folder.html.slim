@@ -1,0 +1,11 @@
+li
+  input.expand-input type="checkbox" id="#{helper.field}-folder-#{folder.id}"
+  .media-container
+    label.expand-label.folder-link for="#{helper.field}-folder-#{folder.id}" = folder.name
+
+  - if folder.children.any? || folder.resources.any?
+    ul.media-nest
+      - with_options locals: { form: form, helper: helper } do |options|
+        = options.render collection: folder.children, partial: "ds_media_library/folder", as: :folder
+        = options.render collection: folder.resources, partial: "ds_media_library/resource", as: :resource
+

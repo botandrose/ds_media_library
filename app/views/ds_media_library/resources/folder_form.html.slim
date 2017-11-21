@@ -1,0 +1,19 @@
+= content_for :breadcrumbs do
+  ul.breadcrumb-nav
+    li = link_to "Media Library", :root
+    li
+      = folder.new_record? ? "New" : "Edit"
+      |  folder
+
+
+= form_for folder do |form|
+  fieldset
+    .field
+      = form.label :parent_id, "Parent folder", class: "optional"
+      = form.collection_select :parent_id, form.object.all_folders, :id, :name, include_blank: " -- none -- "
+    .field
+      = form.label :name, "Folder name"
+      = form.text_field :name, class: "name-input"
+
+  = render "shared/submit", name: "folder"
+
