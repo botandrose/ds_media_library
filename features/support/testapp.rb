@@ -1,22 +1,27 @@
-require "bundler/setup" # some deps are pulled from git
+require "rails/all"
 
-require "spec_helper"
-require "active_record"
-require "database_cleaner"
-require "byebug"
-
-def silence_stream(stream)
-  old_stream = stream.dup
-  stream.reopen(RbConfig::CONFIG['host_os'] =~ /mswin|mingw/ ? 'NUL:' : '/dev/null')
-  stream.sync = true
-  yield
-ensure
-  stream.reopen(old_stream)
-  old_stream.close
+class TestApp < Rails::Application
+  config.secret_key_base = "test"
+  config.eager_load = false
 end
 
-ActiveRecord::Base.establish_connection adapter: "sqlite3", database: ":memory:"
-ENV["DATABASE_URL"] = "sqlite3::memory:"
+Rails.logger = Logger.new("/dev/stdout")
+# Rails.logger = Logger.new("/dev/null")
+
+class ApplicationController < ActionController::Base
+  def self.expose *methods
+    methods.each do |method|
+      attr_reader method
+      helper_method method
+    end
+  end
+end
+
+require "ds_media_library"
+
+ENV["DATABASE_URL"] = "sqlite3:tmp/test.sqlite3"
+
+TestApp.initialize!
 
 # sqlite3 hates our mysql indexes
 ActiveRecord::Migration.class_eval do
@@ -28,8 +33,7 @@ ActiveRecord::Migration.class_eval do
   end
 end
 
-DatabaseCleaner.strategy = :transaction
-silence_stream(STDOUT) do
+ActiveRecord::Migration.suppress_messages do
   ActiveRecord::Schema.define(version: 20170822210346) do
     create_table "folders", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
       t.string "name"
@@ -66,16 +70,11 @@ silence_stream(STDOUT) do
   end
 end
 
-RSpec.configure do |config|
-  config.before(:each) do
-    DatabaseCleaner.start
-  end
-
-  config.after(:each) do
-    DatabaseCleaner.clean
-  end
+TestApp.routes.draw do
+  mount DSMediaLibrary::Engine => "/media_library"
+  root to: redirect("/media_library")
 end
 
-# silence deprecation warning
-I18n.enforce_available_locales = true
+Capybara.app = TestApp
 
+require 'cucumber/rails/capybara'
