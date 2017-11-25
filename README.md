@@ -17,13 +17,54 @@ And then execute:
 
 ## Usage
 
-TODO: Write usage instructions here
+1. Mount the engine at the path of your choosing in your routes:
+```ruby
+# config/routes.rb
+Rails.application.routes.draw do
+  # ...
+  mount DSMediaLibrary::Engine => "/media_library"
+end
+```
+
+2. Require the app's JavaScript and CSS assets:
+```sass
+// application.sass
+@import ds_media_library
+```
+```coffeescript
+# application.coffee
+#= require ds_media_library
+```
+
+3. Add ds_node columns to your models:
+```ruby
+# app/models/widget.rb
+class Widget < ActiveRecord::Base
+  ds_resource :cat_picture
+  belongs_to_many_ds_resources :dog_pictures
+end
+```
+
+4. Use the `#media_library` form helper where you would normally use the `#file_field` form helper:
+```slim
+/ app/views/widgets/form.html.slim
+= form_for @widget do |form|
+  = form.label :cat_picture
+  = form.media_library :cat_picture
+
+  = form.label :dog_pictures
+  = form.media_library :dog_pictures, multiple: true
+```
+
+5. Profit!
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake` to run the tests.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+You can also run `bin/server` to start a dummy app at http://localhost:8080 that will allow you to experiment. Note that the state of the app is destroyed on exit.
+
+To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org). You can then run `bundle update ds_media_library` in projects that use it to update them to the newly-released version.
 
 ## Contributing
 
