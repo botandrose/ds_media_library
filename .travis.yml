@@ -1,5 +1,11 @@
 sudo: false
 language: ruby
 rvm:
-  - 2.2.3
+  - 2.2
 before_install: gem install bundler -v 1.16.0
+cache: bundler
+addons:
+  apt:
+    sources:
+      - mplayer
+
