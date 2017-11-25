@@ -1,7 +1,10 @@
+require 'bundler/setup'
 require "rails/all"
 require "ds_media_library"
 
-class TestApp < Rails::Application
+module Dummy; end
+
+class Dummy::App < Rails::Application
   config.secret_key_base = "test"
   config.eager_load = false
   config.logger = Logger.new("/dev/stdout")
@@ -10,10 +13,7 @@ end
 
 ENV["DATABASE_URL"] = "sqlite3:tmp/test.sqlite3"
 
-TestApp.initialize!
-
-Capybara.app = TestApp
-require "cucumber/rails/capybara"
+Dummy::App.initialize!
 
 class ApplicationController < ActionController::Base
   def self.expose *methods
@@ -35,12 +35,19 @@ class ApplicationController < ActionController::Base
   end
 end
 
-TestApp.routes.draw do
+Dummy::App.routes.draw do
   mount DSMediaLibrary::Engine => "/media_library"
   root to: "application#show"
   patch "/" => "application#update"
 end
 
-After do
-  Rails.public_path.rmtree # soft delete leaves files in place
+# app's soft delete leaves files in place, so clean them up
+at_exit do
+  begin
+    Rails.public_path.rmtree
+  rescue Errno::ENOENT
+  end
 end
+
+require_relative "./database"
+require_relative "./views"

@@ -1,13 +1,3 @@
-require 'database_cleaner'
-require 'database_cleaner/cucumber'
-
-DatabaseCleaner.strategy = :truncation
-DatabaseCleaner.clean_with :truncation
-
-Around do |scenario, block|
-  DatabaseCleaner.cleaning(&block)
-end
-
 # sqlite3 hates our mysql indexes
 ActiveRecord::Migration.class_eval do
   def add_index *; end

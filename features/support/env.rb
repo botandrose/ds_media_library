@@ -12,3 +12,6 @@ Capybara.register_driver :poltergeist do |app|
 end
 Capybara.default_driver = :poltergeist
 
+require './dummy/app'
+Capybara.app = Dummy::App
+require "cucumber/rails/capybara"

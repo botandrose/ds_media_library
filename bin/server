@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+require "rack"
+require_relative "../dummy/app"
+Rack::Server.start(app: Dummy::App)
+
