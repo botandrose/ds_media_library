@@ -2,12 +2,12 @@ require "active_support/number_helper"
 
 module DSMediaLibrary
   module FormHelper
-    def media_library field, label: field.to_s.humanize, multiple: false, optional: false, dimensions: nil, helptext: nil, preview: true, required: false, &block
-      helper = MediaLibrary.new(object.send(field), field, label, multiple, optional, dimensions, helptext, preview, required, block)
+    def media_library field, label: field.to_s.humanize, multiple: false, optional: false, dimensions: nil, helptext: nil, preview: true, required: false
+      helper = MediaLibrary.new(object.send(field), field, label, multiple, optional, dimensions, helptext, preview, required)
       @template.render "ds_media_library/form_helper/media_library_helper", form: self, helper: helper
     end
 
-    class MediaLibrary < Struct.new(:object, :field, :label, :multiple, :optional, :dimensions, :helptext, :preview, :required, :block)
+    class MediaLibrary < Struct.new(:object, :field, :label, :multiple, :optional, :dimensions, :helptext, :preview, :required)
       def ids
         Array(object).map(&:id)
       end

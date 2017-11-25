@@ -2,27 +2,10 @@ li.resource class=("hidden" if resource.hidden?)
   .media-container
     label.expand-label
       - if helper.multiple
-        input.modal-input.media-choice type="checkbox" value=resource.id checked=form.object.send(helper.field_id_name).include?(resource.id)
+        input.modal-input.media-choice type="checkbox" value=resource.id checked=form.object.send(helper.field_id_name).include?(resource.id) data-url=resource.url data-type=(resource.video? ? "video" : "image") data-filename=resource.original_file_name
       - else
-        input.modal-input.media-choice type="radio" name=helper.field_id_name value=resource.id checked=form.object.send(helper.field_id_name)==resource.id
+        input.modal-input.media-choice type="radio" name=helper.field_id_name value=resource.id checked=form.object.send(helper.field_id_name)==resource.id data-url=resource.url data-type=(resource.video? ? "video" : "image") data-filename=resource.original_file_name
 
       span.media-link alt=resource.original_file_name
         = resource.original_file_name
-
-      script.media-preview-template type="text/x-html-template"
-        = render "ds_media_library/form_helper/image_preview", image: resource, preview: helper.preview do
-          - if helper.multiple
-            = form.check_box helper.field_id_name, { multiple: true, checked: true }, resource.id, nil
-            = form.check_box helper.remove_field_name, { multiple: true }, resource.id, nil
-            = form.label :"#{helper.remove_field_name}_#{resource.id}" do
-              span Remove #{helper.label.downcase.singularize} {{index}}
-
-          - else
-            = form.hidden_field helper.field_id_name, value: resource.id
-            - if helper.optional
-              = form.check_box helper.remove_field_name
-              = form.label helper.remove_field_name do
-                span Remove #{helper.label.downcase}
-
-          - helper.block.call(resource) if helper.block
 

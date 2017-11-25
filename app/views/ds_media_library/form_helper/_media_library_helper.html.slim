@@ -28,3 +28,26 @@
 
   dl.playlist-media id="selected_media_#{helper.html_id}"
 
+  script.media-preview-template type="text/x-html-template"
+    dfn.preview-form
+      .preview-wrapper
+        - if helper.preview
+          | <{{type}} src="{{url}}" controls=true />
+
+        - if helper.multiple
+          = form.check_box helper.field_id_name, { multiple: true, checked: true }, "{{id}}", nil
+          label
+            = form.check_box helper.remove_field_name, { multiple: true }, "{{id}}", nil
+            span Remove #{helper.label.downcase.singularize} {{index}}
+
+        - else
+          = form.hidden_field helper.field_id_name, value: "{{id}}"
+          - if helper.optional
+            = form.check_box helper.remove_field_name
+            = form.label helper.remove_field_name do
+              span Remove #{helper.label.downcase}
+
+        dt
+          figcaption
+            | {{filename}}
+

@@ -11,6 +11,7 @@ class MediaLibrary
     baseId = @$el.attr("data-media-library")
     @ids = JSON.parse(@$el.attr("data-media-library-ids"))
     @$el.find(".media-choice:radio").change => @closeModal()
+    @template = @$el.find(".media-preview-template")[0].innerHTML
     @$target = $("#selected_media_" + baseId)
     @$modalToggle = $("#" + baseId)
     @$modalToggle.change (event) =>
@@ -22,8 +23,13 @@ class MediaLibrary
 
   showPreviews: ->
     @$target.empty()
-    previews = @$el.find(".media-choice:checked ~ .media-preview-template").map (index, template) =>
-      template.innerHTML.replace(/{{index}}/g, index + 1)
+    previews = @$el.find(".media-choice:checked").map (index, resource) =>
+      @renderTemplate
+        index: index + 1
+        id: $(resource).attr("value")
+        type: $(resource).attr("data-type")
+        url: $(resource).attr("data-url")
+        filename: $(resource).attr("data-filename")
     previews = previews.toArray().sort (a,b) => @sortPreviews(a,b)
     @$target.append previews.join("\n")
     @$target.sortable()
@@ -38,6 +44,12 @@ class MediaLibrary
 
   extractId: (html) ->
     parseInt(html.match(/value="(\d+)"/)[1])
+
+  renderTemplate: (context) ->
+    template = @template
+    for key, value of context
+      template = template.replace ///{{#{key}}}///g, value
+    template
 
 $ ->
   $("[data-toggle-all-checkboxes]").click (event) ->
