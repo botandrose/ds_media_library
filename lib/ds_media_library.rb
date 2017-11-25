@@ -1,5 +1,4 @@
 require "ds_media_library/version"
-require "ds_media_library/form_helper"
 require "ds_media_library/engine"
 
 module DSMediaLibrary
