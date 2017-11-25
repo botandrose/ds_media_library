@@ -40,6 +40,10 @@ module DSMediaLibrary
         end
       end
 
+      def field_type
+        multiple ? "checkbox" : "radio"
+      end
+
       def html_id
         "media-modal-#{field}"
       end

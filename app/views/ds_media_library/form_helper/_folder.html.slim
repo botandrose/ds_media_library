@@ -5,7 +5,6 @@ li
 
   - if folder.children.any? || folder.resources.any?
     ul.media-nest
-      - with_options locals: { form: form, helper: helper } do |options|
-        = options.render collection: folder.children, partial: "ds_media_library/form_helper/folder", as: :folder
-        = options.render collection: folder.resources, partial: "ds_media_library/form_helper/resource", as: :resource
+      = render collection: folder.children, partial: "ds_media_library/form_helper/folder", as: :folder, locals: { helper: helper }
+      = render collection: folder.resources, partial: "ds_media_library/form_helper/resource", as: :resource, locals: { helper: helper }
 

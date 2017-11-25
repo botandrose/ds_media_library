@@ -22,9 +22,8 @@
         input.text#search_media type="text" placeholder="Type keywords to search media (case sensitive)"
 
         ul.media-nav
-          - with_options locals: { form: form, helper: helper } do |options|
-            = options.render collection: helper.root_folders, partial: "ds_media_library/form_helper/folder", as: :folder
-            = options.render collection: helper.root_resources, partial: "ds_media_library/form_helper/resource", as: :resource
+          = render collection: helper.root_folders, partial: "ds_media_library/form_helper/folder", as: :folder, locals: { helper: helper }
+          = render collection: helper.root_resources, partial: "ds_media_library/form_helper/resource", as: :resource, locals: { helper: helper }
 
   dl.playlist-media id="selected_media_#{helper.html_id}"
 
