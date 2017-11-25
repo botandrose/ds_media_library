@@ -1,5 +1,6 @@
 require "ds_node"
 require "slim"
+require "sass-rails"
 require "jquery-rails"
 require "jquery-ui-rails"
 require "coffee-rails"
@@ -23,7 +24,7 @@ module DSMediaLibrary
     end
 
     initializer "ds_media_library.assets" do
-      config.assets.precompile += %w( ds_media_library.js )
+      config.assets.precompile += %w( ds_media_library.css ds_media_library.js )
     end
 
     isolate_namespace DSMediaLibrary

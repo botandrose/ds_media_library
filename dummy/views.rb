@@ -21,67 +21,7 @@ end
 ApplicationController.prepend_view_path InMemoryResolver.new
 
 InMemoryResolver.store["layouts/test"] = <<-SLIM
-  sass:
-    .hidden
-      display: none
-
-    .media-nest
-      display: none
-
-    .expand-input:checked ~ .media-nest
-      display: block
-
-    .media-button, .flash-notice, .flash-alert
-      text-transform: uppercase
-
-    .modal-input
-      &:checked ~ .modal-wrapper
-        left: 0
-        opacity: 1
-        .modal-content
-          display: inline-block
-        .modal-bg
-          background: white
-          opacity: 1
-
-    .modal-wrapper
-      position: fixed
-      display: -webkit-flex
-      display: flex
-      top: 0
-      left: -100vw
-      width: 100vw
-      height: 100vh
-      z-index: 9999
-      text-align: left
-
-    .modal-bg
-      background: rgba(#808080, 0.85)
-      opacity: 0
-      position: absolute
-      z-index: 2
-      width: 100vw
-      height: 100vh
-      top: 0
-      left: 0
-
-    .modal-content
-      display: none
-      margin: auto 0
-      width: 94vw
-      height: 100vh
-      padding: 40px
-      z-index: 3
-
-    .modal-close
-      position: absolute
-      top: -10px
-      right: 40px
-      margin: 0
-      width: 40px
-      height: 40px
-      line-height: 40px
-      text-align: center
+  = stylesheet_link_tag "ds_media_library"
 
   h1 TEST
 
