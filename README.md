@@ -1,8 +1,7 @@
 # DSMediaLibrary
+[![Build Status](https://travis-ci.org/botandrose/ds_media_library.svg?branch=master)](https://travis-ci.org/botandrose/ds_media_library)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/ds_media_library`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+A reusable Media Library for Downstream projects built as a Rails Engine.
 
 ## Installation
 
@@ -15,10 +14,6 @@ gem 'ds_media_library'
 And then execute:
 
     $ bundle
-
-Or install it yourself as:
-
-    $ gem install ds_media_library
 
 ## Usage
 
