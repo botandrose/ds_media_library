@@ -1,7 +1,6 @@
 #= require jquery
 #= require jquery_ujs
 #= require jquery-ui/widgets/sortable
-#= require toggle_all_checkboxes
 
 $ ->
   $("[data-media-library]").each ->
@@ -29,9 +28,6 @@ class MediaLibrary
     @$target.append previews.join("\n")
     @$target.sortable()
 
-  isMultiple: ->
-    @$el.find(".media-choice").is(":checkbox")
-
   sortPreviews: (a, b) ->
     aId = @extractId(a)
     bId = @extractId(b)
@@ -42,4 +38,10 @@ class MediaLibrary
 
   extractId: (html) ->
     parseInt(html.match(/value="(\d+)"/)[1])
+
+$ ->
+  $("[data-toggle-all-checkboxes]").click (event) ->
+    event.preventDefault()
+    $checkboxes = $(this.getAttribute("data-toggle-all-checkboxes"))
+    $checkboxes.prop checked: !$checkboxes.is(":checked")
 
