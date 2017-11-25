@@ -13,10 +13,13 @@
         .field
           = form.label :folder_id, "Parent folder", class: "optional"
           = form.collection_select :folder_id, DSMediaLibrary::Folder.all, :id, :name, include_blank: " -- none -- "
-        .field
-          = form.label :expires_at, "Expiration date", class: "optional"
-          = form.date_field :expires_at
-          .warning-text Expired media items will appear with a <i class="fa fa-exclamation-triangle"></i> icon in the media library and an email will be sent upon expiration as a reminder to update it.
+
+        -# FIXME extract to super project
+        - if form.object.respond_to?(:expires_at)
+          .field
+            = form.label :expires_at, "Expiration date", class: "optional"
+            = form.date_field :expires_at
+            .warning-text Expired media items will appear with a <i class="fa fa-exclamation-triangle"></i> icon in the media library and an email will be sent upon expiration as a reminder to update it.
 
       .field
         = form.label :file, "Upload media"

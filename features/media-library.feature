@@ -10,6 +10,7 @@ Feature: Manage media
       | example.mp4    | Example folder |
 
     Given I am on the homepage
+    When I follow "Manage Media Library"
 
   Scenario: See existing media
     When I check "Example folder"
@@ -53,8 +54,8 @@ Feature: Manage media
     Then I should see the following media tree:
       | Another folder  |
       | Example folder  |
-      | - example.mp4   |
       | - NEW.jpg       |
+      | - example.mp4   |
       | example.jpg     |
 
   Scenario: Edit a media folder
@@ -91,22 +92,22 @@ Feature: Manage media
       | - example.mp4   |
 
   Scenario: Added media files show in root library
-    When I follow "General Settings" under the "Registration Table" dropdown
-    And I attach the "bg1.jpg" file to "Upload background"
-    And I press "Save background"
-    Then I should see "BACKGROUNDS UPDATED"
+    When I follow "Widget"
+    And I attach the "cat.jpg" file to "Cat picture"
+    And I press "Save"
+    Then I should see "WIDGET UPDATED"
 
-    When I follow "Media Library"
+    When I follow "Manage Media Library"
 
     Then I should see the following media tree:
       | Another folder  |
       | Example folder  |
-      | bg1.jpg         |
+      | cat.jpg         |
       | example.jpg     |
 
   Scenario: Use media library to attach media
-    When I follow "General Settings" under the "Concierge Wall" dropdown
-    And I open the media library for the "Panel background"
+    When I follow "Widget"
+    And I open the media library for the "Cat picture"
     Then I should see the following media tree:
       | Another folder  |
       | Example folder  |
@@ -115,55 +116,44 @@ Feature: Manage media
     When I choose "example.jpg"
     Then I should see "example.jpg"
 
-    When I press "Save settings"
-    Then I should see "GENERAL SETTINGS UPDATED"
-
-    When I follow "General Settings" under the "Concierge Wall" dropdown
-    Then I should see "example.jpg"
+    When I press "Save"
+    Then I should see "WIDGET UPDATED"
+    And I should see "example.jpg"
 
   Scenario: Use media library to select multiple media
-    Given the following speakeasy playlists exist:
-      | name             | location | timing   | media       |
-      | Example playlist | A B C    | 1 minute | example.png |
-
-    When I follow "Speakeasy"
-    And I follow "Example playlist"
-    And I check "Media library"
+    When I follow "Widget"
+    And I open the media library for the "Dog pictures"
     Then I should see the following media tree:
       | Another folder  |
       | Example folder  |
       | example.jpg     |
-      | example.png     |
-    And I should see "example.png" checked
 
     When I check "Example folder"
     And I check "example.jpg"
     And I check "example.mp4"
     And I close the modal window
-    And I press "Save playlist"
+    And I press "Save"
 
-    Then I should see "PLAYLIST UPDATED"
-    And I should see the following speakeasy playlists:
-      | LOCATION | NAME             | MEDIA ITEMS |
-      | A B C    | Example playlist | 3           |
+    Then I should see "WIDGET UPDATED"
+    And I should see "example.jpg"
+    And I should see "example.mp4"
 
   Scenario: Removing media doesn't remove it from library
-    When I follow "General Settings" under the "Registration Table" dropdown
-    And I attach the "bg1.jpg" file to "Upload background"
-    And I press "Save background"
-    Then I should see "BACKGROUNDS UPDATED"
+    When I follow "Widget"
+    And I attach the "cat.jpg" file to "Cat picture"
+    And I press "Save"
+    Then I should see "WIDGET UPDATED"
 
-    When I attach the "bg2.jpg" file to "Upload background"
-    And I press "Save background"
-    Then I should see "BACKGROUNDS UPDATED"
+    When I open the media library for the "Cat picture"
+    And I choose "example.jpg"
+    And I press "Save"
+    Then I should see "WIDGET UPDATED"
 
-    When I follow "Media Library"
-
+    When I follow "Manage Media Library"
     Then I should see the following media tree:
       | Another folder  |
       | Example folder  |
-      | bg1.jpg         |
-      | bg2.jpg         |
+      | cat.jpg         |
       | example.jpg     |
 
   Scenario: Batch move media to folders
@@ -185,13 +175,13 @@ Feature: Manage media
       | Example folder  |
 
   Scenario: (Soft) Delete media
-    When I follow "General Settings" under the "Concierge Wall" dropdown
-    And I open the media library for the "Panel background"
+    When I follow "Widget"
+    And I open the media library for the "Cat picture"
     And I choose "example.jpg"
-    And I press "Save settings"
-    Then I should see "GENERAL SETTINGS UPDATED"
+    And I press "Save"
+    Then I should see "WIDGET UPDATED"
 
-    When I follow "Media Library"
+    When I follow "Manage Media Library"
     And I follow "Delete media" within the "example.jpg" file
     # And I confirm deletion
 
@@ -200,7 +190,7 @@ Feature: Manage media
       | Another folder  |
       | Example folder  |
 
-    When I follow "General Settings" under the "Concierge Wall" dropdown
+    When I follow "Widget"
     Then I should see "example.jpg"
 
   Scenario: Delete empty folder

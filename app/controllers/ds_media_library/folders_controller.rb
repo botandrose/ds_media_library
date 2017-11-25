@@ -8,7 +8,7 @@ module DSMediaLibrary
     end
 
     def create
-      DSMediaLibrary::Folder.create! params[:folder]
+      DSMediaLibrary::Folder.create! folder_params
       redirect_to :resources, notice: "Folder created"
     end
 
@@ -18,13 +18,19 @@ module DSMediaLibrary
     end
 
     def update
-      DSMediaLibrary::Folder.update params[:id], params[:folder]
+      DSMediaLibrary::Folder.update params[:id], folder_params
       redirect_to :resources, notice: "Folder updated"
     end
 
     def destroy
       DSMediaLibrary::Folder.destroy params[:id]
       redirect_to :resources, notice: "Folder deleted"
+    end
+
+    private
+
+    def folder_params
+      params.require(:folder).permit(:parent_id, :name)
     end
   end
 end

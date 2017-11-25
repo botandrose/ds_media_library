@@ -4,13 +4,11 @@ require 'chop'
 require 'capybara'
 require 'capybara/poltergeist'
 require 'phantomjs'
-require 'database_cleaner'
+require 'byebug'
+
 Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new app,
     phantomjs: Phantomjs.path
 end
 Capybara.default_driver = :poltergeist
-
-# DatabaseCleaner.strategy = :transaction
-# DatabaseCleaner.clean_with :truncation
 

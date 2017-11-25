@@ -38,6 +38,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "sqlite3"
   spec.add_development_dependency "poltergeist"
   spec.add_development_dependency "phantomjs"
+  spec.add_development_dependency "capybara-screenshot"
   spec.add_development_dependency "database_cleaner"
   spec.add_development_dependency "byebug"
 
@@ -45,4 +46,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "slim"
   spec.add_dependency "ds_node"
   spec.add_dependency "awesome_nested_set"
+  spec.add_dependency "coffee-rails"
+  spec.add_dependency "jquery-rails"
+  spec.add_dependency "jquery-ui-rails"
 end

@@ -1,0 +1,2 @@
+require 'capybara-screenshot/cucumber'
+

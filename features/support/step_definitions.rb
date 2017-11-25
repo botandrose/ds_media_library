@@ -24,8 +24,20 @@ When "I check {string}" do |field|
 end
 
 Then "I should see the following media tree:" do |table|
-  # table is a Cucumber::MultilineArgument::DataTable
-  pending # Write code here that turns the phrase above into concrete actions
+  def recurse_tree root, structure = [], prefix = ""
+    root.all(:xpath, "./li").each do |li|
+      if label = li.first("label")
+        structure << [prefix + label.text]
+      end
+      if root = li.first("ul")
+        new_prefix = prefix.empty? ? "- #{prefix}" : prefix + "  "
+        structure = recurse_tree(root, structure, new_prefix)
+      end
+    end
+    structure
+  end
+
+  table.diff! recurse_tree(find(".media-nav"))
 end
 
 When "I select {string} from {string}" do |value, field|
@@ -41,52 +53,33 @@ When "I press {string}" do |button|
 end
 
 Then "I should see {string}" do |text|
-  page.should have_text(text)
+  expect(page).to have_text(text)
 end
 
 When "I attach the {string} file to {string}" do |path, field|
   attach_file field, "features/support/fixtures/#{path}"
 end
 
-When "I follow {string} within the {string} folder" do |string, string2|
-  pending # Write code here that turns the phrase above into concrete actions
+When "I follow {string} within the {string} file/folder" do |link, context|
+  within "li", text: context do
+    click_link link
+  end
 end
 
-When "I follow {string} within the {string} file" do |string, string2|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-When "I follow {string} under the {string} dropdown" do |string, string2|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-When "I open the media library for the {string}" do |string|
-  pending # Write code here that turns the phrase above into concrete actions
+When "I open the media library for the {string}" do |field|
+  field = find_field(field)
+  field.find(:xpath, "..").find("label", text: "MEDIA LIBRARY").click
 end
 
 When "I choose {string}" do |field|
   choose field
 end
 
-Given "the following speakeasy playlists exist:" do |table|
-  # table is a Cucumber::MultilineArgument::DataTable
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
 Then "I should see {string} checked" do |string|
-  find_field(field).should be_checked
+  expect(find_field(field)).to be_checked
 end
 
 When "I close the modal window" do
   find(".modal-close").click
-end
-
-Then "I should see the following speakeasy playlists:" do |table|
-  # table is a Cucumber::MultilineArgument::DataTable
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Given "today is {string}" do |string|
-  pending # Write code here that turns the phrase above into concrete actions
 end
 

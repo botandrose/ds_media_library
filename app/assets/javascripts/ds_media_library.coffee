@@ -1,4 +1,7 @@
+#= require jquery
+#= require jquery_ujs
 #= require jquery-ui/widgets/sortable
+#= require toggle_all_checkboxes
 
 $ ->
   $("[data-media-library]").each ->

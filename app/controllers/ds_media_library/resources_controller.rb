@@ -13,8 +13,8 @@ module DSMediaLibrary
     end
 
     def create
-      params[:ds_node_resource][:file].each do |file|
-        DSNode::Resource.create! params[:ds_node_resource].merge(file: file)
+      resources_params.each do |resource_params|
+        DSNode::Resource.create! resource_params
       end
       redirect_to :resources, notice: "Media created"
     end
@@ -24,9 +24,7 @@ module DSMediaLibrary
     end
 
     def update
-      resource.update! params[:ds_node_resource]
-      # FIXME extract to DSNode gem
-      resource.update! original_file_name: params[:ds_node_resource][:file].original_filename if params[:ds_node_resource][:file]
+      resource.update! resource_params
       redirect_to :resources, notice: "Media updated"
     end
 
@@ -53,6 +51,19 @@ module DSMediaLibrary
     def recurse_folders folders
       folders.flat_map do |folder|
         [folder] + recurse_folders(folder.children)
+      end
+    end
+
+    def resource_params
+      resource_params = params.require(:ds_node_resource).permit(:folder_id, :file)
+      # FIXME extract to DSNode gem
+      resource_params.merge!(original_file_name: params[:ds_node_resource][:file].original_filename) if params[:ds_node_resource][:file]
+      resource_params
+    end
+
+    def resources_params
+      params[:ds_node_resource][:file].map do |file|
+        params.require(:ds_node_resource).permit(:folder_id).merge(file: file)
       end
     end
   end
