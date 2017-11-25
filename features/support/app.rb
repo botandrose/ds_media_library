@@ -218,3 +218,7 @@ end
 Capybara.app = TestApp
 
 require 'cucumber/rails/capybara'
+
+After do
+  Rails.public_path.rmtree # soft delete leaves files in place
+end
