@@ -23,6 +23,6 @@
 
   input.text#search_media type="text" placeholder="Type keywords to search media (case sensitive)"
   ul.media-nav
-    = render collection: root.children, partial: "ds_media_library/resources/folder"
-    = render collection: root.resources, partial: "ds_media_library/resources/resource"
+    = render collection: root.children, partial: "ds_media_library/manage/folders/folder"
+    = render collection: root.resources, partial: "ds_media_library/manage/resources/resource"
 

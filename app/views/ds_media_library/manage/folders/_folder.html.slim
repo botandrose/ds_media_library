@@ -9,6 +9,6 @@ li
 
   - if folder.children.any? || folder.resources.any?
     ul.media-nest
-      = render collection: folder.children, partial: "ds_media_library/resources/folder"
-      = render collection: folder.resources, partial: "ds_media_library/resources/resource"
+      = render collection: folder.children, partial: "ds_media_library/manage/folders/folder"
+      = render collection: folder.resources, partial: "ds_media_library/manage/resources/resource"
 

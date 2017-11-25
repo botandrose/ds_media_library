@@ -10,7 +10,7 @@ li.resource class=("hidden" if resource.hidden?)
         = resource.original_file_name
 
       script.media-preview-template type="text/x-html-template"
-        = render "ds_media_library/image_preview", image: resource, preview: helper.preview do
+        = render "ds_media_library/form_helper/image_preview", image: resource, preview: helper.preview do
           - if helper.multiple
             = form.check_box helper.field_id_name, { multiple: true, checked: true }, resource.id, nil
             = form.check_box helper.remove_field_name, { multiple: true }, resource.id, nil

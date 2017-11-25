@@ -25,7 +25,7 @@
         = form.label :file, "Upload media"
         = form.file_field :file, multiple: resource.new_record?
         - unless form.object.new_record?
-          = render "shared/image_preview", image: form.object
+          = render "ds_media_library/form_helper/image_preview", image: form.object
 
-  = render "shared/submit", name: "media"
+  = render "ds_media_library/manage/submit", name: "media"
 

@@ -4,7 +4,7 @@ module DSMediaLibrary
 
     def new
       @folder = DSMediaLibrary::Folder.new
-      render "ds_media_library/resources/folder_form"
+      render "ds_media_library/manage/folders/form"
     end
 
     def create
@@ -14,7 +14,7 @@ module DSMediaLibrary
 
     def edit
       @folder = DSMediaLibrary::Folder.find(params[:id])
-      render "ds_media_library/resources/folder_form"
+      render "ds_media_library/manage/folders/form"
     end
 
     def update

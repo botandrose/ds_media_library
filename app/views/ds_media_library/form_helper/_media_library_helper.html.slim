@@ -23,8 +23,8 @@
 
         ul.media-nav
           - with_options locals: { form: form, helper: helper } do |options|
-            = options.render collection: helper.root_folders, partial: "ds_media_library/folder", as: :folder
-            = options.render collection: helper.root_resources, partial: "ds_media_library/resource", as: :resource
+            = options.render collection: helper.root_folders, partial: "ds_media_library/form_helper/folder", as: :folder
+            = options.render collection: helper.root_resources, partial: "ds_media_library/form_helper/resource", as: :resource
 
   dl.playlist-media id="selected_media_#{helper.html_id}"
 

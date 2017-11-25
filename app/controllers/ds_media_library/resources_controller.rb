@@ -5,11 +5,12 @@ module DSMediaLibrary
     def index
       @root = DSMediaLibrary::Folder.root
       @folders = folders_with_children
+      render "ds_media_library/manage/index"
     end
 
     def new
       @resource = DSNode::Resource.new
-      render :form
+      render "ds_media_library/manage/resources/form"
     end
 
     def create
@@ -20,7 +21,7 @@ module DSMediaLibrary
     end
 
     def edit
-      render :form
+      render "ds_media_library/manage/resources/form"
     end
 
     def update
