@@ -37,6 +37,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "slim"
   spec.add_dependency "ds_node"
   spec.add_dependency "awesome_nested_set"
+  spec.add_dependency "sass-rails"
   spec.add_dependency "coffee-rails"
   spec.add_dependency "jquery-rails"
   spec.add_dependency "jquery-ui-rails"
