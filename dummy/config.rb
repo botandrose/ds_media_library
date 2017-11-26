@@ -29,7 +29,9 @@ class ApplicationController < ActionController::Base
   end
 
   def update
-    Widget.first_or_create!.update! params.require(:widget).permit!
+    widget = Widget.first_or_create!
+    widget_params = params.require(:widget).permit!
+    widget.update! widget_params
     redirect_to "/", notice: "Widget updated"
   end
 end

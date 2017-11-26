@@ -11,7 +11,7 @@ module DSMediaLibrary
     class MediaLibrary < Struct.new(:ids, :field, :label, :multiple, :optional, :dimensions, :helptext, :preview, :required)
       def self.from_params params
         new(
-          JSON.parse(params[:ids]),
+          Array(params[:ids] || []).map(&:to_i),
           params[:field],
           params[:label],
           params[:multiple] == "true",

@@ -116,9 +116,22 @@ Feature: Manage media
     When I choose "example.jpg"
     Then I should see "example.jpg"
 
+    # state persists when reopening
+    When I open the media library for the "Cat picture"
+    Then I should see "example.jpg" checked
+
+    # state persists after closing again
+    When I close the modal window
+    Then I should see "example.jpg"
+
+    # state persists after saving
     When I press "Save"
     Then I should see "WIDGET UPDATED"
-    And I should see "example.jpg"
+    Then I should see "example.jpg"
+
+    # state persists when opening after save
+    When I open the media library for the "Cat picture"
+    Then I should see "example.jpg" checked
 
   Scenario: Use media library to select multiple media
     When I follow "Widget"
@@ -132,11 +145,31 @@ Feature: Manage media
     And I check "example.jpg"
     And I check "example.mp4"
     And I close the modal window
-    And I press "Save"
+    Then I should see "example.jpg"
+    And I should see "example.mp4"
 
+    # state persists when reopening
+    When I open the media library for the "Dog pictures"
+    And I check "Example folder"
+    Then I should see "example.jpg" checked
+    And I should see "example.mp4" checked
+
+    # state persists after closing again
+    When I close the modal window
+    Then I should see "example.jpg"
+    And I should see "example.mp4"
+
+    # state persists after saving
+    When I press "Save"
     Then I should see "WIDGET UPDATED"
     And I should see "example.jpg"
     And I should see "example.mp4"
+
+    # state persists when opening after save
+    When I open the media library for the "Dog pictures"
+    And I check "Example folder"
+    Then I should see "example.jpg" checked
+    And I should see "example.mp4" checked
 
   Scenario: Removing media doesn't remove it from library
     When I follow "Widget"

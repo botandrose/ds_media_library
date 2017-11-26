@@ -75,7 +75,7 @@ When "I choose {string}" do |field|
   choose field
 end
 
-Then "I should see {string} checked" do |string|
+Then "I should see {string} checked" do |field|
   expect(find_field(field)).to be_checked
 end
 

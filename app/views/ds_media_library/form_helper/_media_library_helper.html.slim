@@ -14,7 +14,7 @@
     .modal-content
       label.modal-close for=helper.html_id
         .borders
-      .media-wrapper data-load-url=ds_media_library.folders_path(helper.to_h) data-selected-resource-ids=helper.ids
+      .media-wrapper data-load-url=ds_media_library.folders_path(helper.to_h)
         - helper.selected_resources.each do |resource|
           input.media-choice type="checkbox" value=resource.id checked=true data-url=resource.url data-type=(resource.video? ? "video" : "image") data-filename=resource.original_file_name
 

@@ -35,7 +35,6 @@ InMemoryResolver.store["layouts/test"] = <<-SLIM
       text-transform: uppercase
 
     .modal-input
-      opacity: 0.001
       &:checked ~ .modal-wrapper
         left: 0
         opacity: 1
