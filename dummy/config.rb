@@ -4,7 +4,10 @@ class Dummy::App < Rails::Application
   config.secret_key_base = "test"
   config.eager_load = false
   config.logger = Logger.new("/dev/stdout")
-  config.logger = Logger.new("/dev/null")
+
+  initializer "log level" do
+    Rails.logger.level = Logger::WARN
+  end
 end
 
 ENV["DATABASE_URL"] = "sqlite3:tmp/test.sqlite3"
