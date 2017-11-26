@@ -15,7 +15,13 @@ class MediaLibrary
     @$target = $("#selected_media_" + baseId)
     @$modalToggle = $("#" + baseId)
     @$modalToggle.change (event) =>
-      @showPreviews() unless event.target.checked
+      if event.target.checked
+        @$el.find("[data-load-url]").each (index, el)->
+          url = $(el).attr("data-load-url")
+          ids = $(el).attr("data-selected-resource-ids")
+          $(el).load(url + "&ids=#{ids}")
+      else
+        @showPreviews()
     @showPreviews()
 
   closeModal: ->
@@ -23,7 +29,9 @@ class MediaLibrary
 
   showPreviews: ->
     @$target.empty()
-    previews = @$el.find(".media-choice:checked").map (index, resource) =>
+    $checked_resources = @$el.find(".media-choice:checked")
+
+    previews = $checked_resources.map (index, resource) =>
       @renderTemplate
         index: index + 1
         id: $(resource).attr("value")
@@ -33,6 +41,12 @@ class MediaLibrary
     previews = previews.toArray().sort (a,b) => @sortPreviews(a,b)
     @$target.append previews.join("\n")
     @$target.sortable()
+
+    ids = $checked_resources.map (index, resource) ->
+      $(resource).attr("value")
+    .toArray()
+    @$el.find("[data-load-url]").each (index, el) ->
+      $(el).attr("data-selected-resource-ids", JSON.stringify(ids))
 
   sortPreviews: (a, b) ->
     aId = @extractId(a)

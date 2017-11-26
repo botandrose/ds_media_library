@@ -2,6 +2,11 @@ module DSMediaLibrary
   class FoldersController < ApplicationController
     expose :folder
 
+    def index
+      helper = FormHelper::MediaLibrary.from_params(params)
+      render "ds_media_library/form_helper/show", locals: { helper: helper}
+    end
+
     def new
       @folder = DSMediaLibrary::Folder.new
       render "ds_media_library/manage/folders/form"

@@ -1,0 +1,10 @@
+.info-text Choose a media file below to associate with this field.  You can manage media in the <a href="/media_library">Media Library</a>. <br />Note that changing a file in the library will update it across all associated media fields in this app.
+
+= link_to "Open all folders", "#", class: "open-all-label", data: { "toggle-all-checkboxes" => ".expand-input" }
+
+input.text#search_media type="text" placeholder="Type keywords to search media (case sensitive)"
+
+ul.media-nav
+  = render collection: helper.root_folders, partial: "ds_media_library/form_helper/folder", as: :folder, locals: { helper: helper }
+  = render collection: helper.root_resources, partial: "ds_media_library/form_helper/resource", as: :resource, locals: { helper: helper }
+

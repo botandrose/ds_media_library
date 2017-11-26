@@ -3,13 +3,28 @@ require "active_support/number_helper"
 module DSMediaLibrary
   module FormHelper
     def media_library field, label: field.to_s.humanize, multiple: false, optional: false, dimensions: nil, helptext: nil, preview: true, required: false
-      helper = MediaLibrary.new(object.send(field), field, label, multiple, optional, dimensions, helptext, preview, required)
+      selected_ids = Array(object.send(field)).map(&:id)
+      helper = MediaLibrary.new(selected_ids, field, label, multiple, optional, dimensions, helptext, preview, required)
       @template.render "ds_media_library/form_helper/media_library_helper", form: self, helper: helper
     end
 
-    class MediaLibrary < Struct.new(:object, :field, :label, :multiple, :optional, :dimensions, :helptext, :preview, :required)
-      def ids
-        Array(object).map(&:id)
+    class MediaLibrary < Struct.new(:ids, :field, :label, :multiple, :optional, :dimensions, :helptext, :preview, :required)
+      def self.from_params params
+        new(
+          JSON.parse(params[:ids]),
+          params[:field],
+          params[:label],
+          params[:multiple] == "true",
+          params[:optional] == "true",
+          params[:dimensions],
+          params[:helptext],
+          params[:preview] == "true",
+          params[:required] == "true",
+        )
+      end
+
+      def selected_resources
+        DSNode::Resource.find(ids)
       end
 
       def single_field
@@ -74,10 +89,6 @@ module DSMediaLibrary
 
       def root_resources
         root.resources
-      end
-
-      def original_file_name
-        object.original_file_name if object.present?
       end
 
       private
