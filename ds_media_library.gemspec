@@ -41,4 +41,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "coffee-rails"
   spec.add_dependency "jquery-rails"
   spec.add_dependency "jquery-ui-rails"
+  spec.add_dependency "font-awesome-rails"
 end
