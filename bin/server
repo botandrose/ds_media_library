@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 require "rack"
 require_relative "../dummy/app"
-Rack::Server.start(app: Dummy::App)
+Rack::Server.start(app: Dummy::App, Host: "0.0.0.0", Port: 3000)
 
