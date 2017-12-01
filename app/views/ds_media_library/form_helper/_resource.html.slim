@@ -1,6 +1,6 @@
 li.resource class=("hidden" if resource.hidden?)
-  .media-container
-    label.expand-label
+  .dsml-media-container
+    label.dsml-expand-label
       input.modal-input.media-choice name="ds_media_library" type=helper.field_type value=resource.id checked=helper.ids.include?(resource.id) data-url=resource.url data-type=(resource.video? ? "video" : "image") data-filename=resource.original_file_name
       span.media-link = resource.original_file_name
 

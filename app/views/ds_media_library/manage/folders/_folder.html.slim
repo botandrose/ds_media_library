@@ -1,14 +1,14 @@
 li
-  input type="checkbox" class="expand-input" id="folder-#{folder.id}"
-  .media-container
-    label.expand-label.folder-link for="folder-#{folder.id}" = folder.name
+  input type="checkbox" class="dsml-expand-input" id="folder-#{folder.id}"
+  .dsml-media-container
+    label.dsml-expand-label.folder-link for="folder-#{folder.id}" = folder.name
     .media-links
-      = link_to "Edit folder", [:edit, folder], class: "edit-icon", title: "Edit folder"
-      = link_to "Delete folder", folder, method: :delete, class: "delete-icon", title: "Delete folder",
+      = link_to "Edit folder", [:edit, folder], class: "dsml-edit-icon", title: "Edit folder"
+      = link_to "Delete folder", folder, method: :delete, class: "dsml-delete-icon", title: "Delete folder",
         data: { confirm: "Are you sure you want to delete this folder? This will move any folders and resources it may contain up into its parent folder." }
 
   - if folder.children.any? || folder.resources.any?
-    ul.media-nest
+    ul.dsml-media-nest
       = render collection: folder.children, partial: "ds_media_library/manage/folders/folder"
       = render collection: folder.resources, partial: "ds_media_library/manage/resources/resource"
 

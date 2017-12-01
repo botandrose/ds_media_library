@@ -2,7 +2,7 @@
 
 = link_to "Open all folders", "#", class: "open-all-label", data: { "toggle-all-checkboxes" => ".expand-input" }
 
-input.text#search_media type="text" placeholder="Type keywords to search media (case sensitive)"
+input.dsml-text#search_media type="text" placeholder="Type keywords to search media (case sensitive)"
 
 ul.media-nav
   = render collection: helper.root_folders, partial: "ds_media_library/form_helper/folder", as: :folder, locals: { helper: helper }

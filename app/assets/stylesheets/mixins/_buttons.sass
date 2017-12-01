@@ -1,4 +1,4 @@
-@mixin button( $bg: $primaryColor, $text-color: #fcfcfc, $font-size: 1.2em, $hover: true, $fa: false )
+=dsml-button( $bg: $primaryColor, $text-color: #fcfcfc, $font-size: 1.2em, $hover: true, $fa: false )
   display: inline-block
   font-size: $font-size
   font-weight: 700
@@ -29,8 +29,8 @@
 
 // input wrapper buttons
 
-=input-button($bg: $primaryColor, $text-color: #fcfcfc, $fa: false, $size: 1.2em, $fa-size: 1.2em)
-  +button($bg, $text-color)
+=dsml-input-button($bg: $primaryColor, $text-color: #fcfcfc, $fa: false, $size: 1.2em, $fa-size: 1.2em)
+  +dsml-button($bg, $text-color)
   padding: 0
   line-height: 1
   input, button

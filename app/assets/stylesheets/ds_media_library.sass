@@ -1,18 +1,38 @@
+// VARIABLES
+
+$primaryColor:  #CC0000
+$secondaryColor: $primaryColor + #1a1a1a
+$bg: #f9f9f9
+
+$teal: #0a628a
+$green: #398927
+$red: #CC0000
+$yellow: #e5c105
+
+$font-size: 1.6em
+$font-weight: 300
+$font: Helvetica, sans-serif
+$default: Helvetica, sans-serif
+
 // IMPORTS
 
 @import font-awesome
 @import "mixins/buttons"
 @import "mixins/icons"
+@import "dsml"
 
 //
+
+body
+  font: 300 62.5% $default
 
 .hidden
   display: none
 
-.media-nest
+.dsml-media-nest
   display: none
 
-.expand-input:checked ~ .media-nest
+.dsml-expand-input:checked ~ .dsml-media-nest
   display: block
 
 .media-button, .flash-notice, .flash-alert
@@ -68,46 +88,32 @@
   line-height: 40px
   text-align: center
 
-// Variables
-
-$primaryColor:  #CC0000
-$secondaryColor: $primaryColor + #1a1a1a
-$bg: #f9f9f9
-
-$teal: #0a628a
-$green: #398927
-$red: #CC0000
-$yellow: #e5c105
-
-$font-size: 1.6em
-$font: Helvetica, sans-serif
-$default: Helvetica, sans-serif
-
 //
 
 $itemHeight: 40px
 
-
-.media-nav
+.dsml-media-nav
+  @extend %dsml-reset-list
   width: 100%
   margin: 25px 0 0
+  font: $font-weight 1.4em $default
   li
     margin: 2px 0
-  .media-nest
+  .dsml-media-nest
     margin: 0
 
-.media-container
+.dsml-media-container
   display: flex
   width: 100%
   border: 1px solid #e0e0e0
   line-height: $itemHeight
   flex-wrap: wrap
   padding: 0 10px
-  .expand-label, .media-links
+  .dsml-expand-label, .media-links
     display: inline-block
     vertical-align: middle
     margin: 0
-  .expand-label
+  .dsml-expand-label
     flex-grow: 1
     font-size: 1em
     line-height: $itemHeight
@@ -126,154 +132,157 @@ $itemHeight: 40px
   &:hover
     background: lighten($yellow, 50%)
 
-//.folder-link, .media-link
-//  &:before
-//    @extend .fa
-//    width: 15px
-//    display: inline-block
-//    margin-right: 4px
-//
-//.folder-link
-//  @extend .fa-folder
-//  font-weight: 900
-//  color: #444
-//
-//.media-link
-//  @extend .fa-file-o
-//  display: block
-//  height: 100%
-//  padding: 0 20px
-//  margin-left: -10px !important
-//  width: calc(100% + 20px)
-//  b, i
-//    display: inline-block
-//  i
-//    &:before
-//      display: inline-block
-//      margin: 0 5px
-//      content: "-"
-//
-//  &[alt$=".jpg"], &[alt$=".jpeg"], &[alt$=".png"], &[alt="Image"]
-//    @extend .fa-file-picture-o
-//  &[alt$=".pdf"], &[alt="PDF"]
-//    @extend .fa-file-pdf-o
-//  &[alt$=".mp4"], &[alt="Video"]
-//    @extend .fa-file-video-o
-//  &[alt$=".com"], &[alt$=".edu"], &[alt$=".org"], &[alt="Web link"]
-//    @extend .fa-globe
-//  &.expired
-//    &:before
-//      content: "\f071"
-//
-//.modal-input, .asset-input
-//  &:checked
-//    & ~ .media-link
-//      background: $red
-//      color: #fff
-//      @extend .fa-check
-//
-//.media-nest
-//  width: 100%
-//  display: block
-//  display: none
-//  li
-//    padding-left: 20px
-//
-//.expand-input
-//  position: absolute
-//  z-index: 4
-//  cursor: pointer
-//  opacity: 0.001
-//  &:checked
-//    & ~ .media-nest
-//      display: block
-//    & + .media-container
-//      .folder-link
-//        @extend .fa-folder-open
-//
-//.modal-content
-//  .media-links
-//    display: none
-//
-//// OPEN ALL
-//
-//#open-all
-//  position: absolute
-//  left: -20px
-//
-//.open-all-label
-//  +button(#fcfcfc, #444, 1.1em, true, "folder-open")
-//
-//// SEARCH MEDIA
-//
-//#search_media
-//  margin: 10px 0 0
-//
-//// SELECT MEDIA
-//
-//.move-input
-//  position: absolute
-//  left: -20px
-//  opacity: 0.001
-//  &:checked
-//    & + .expand-label
-//      span.media-link
-//        background: $red
-//        color: #fff
-//        @extend .fa-check
-//
-//.move-selected
-//  display: none
-//  vertical-align: top
-//  float: none
-//  margin: 0
-//  width: auto
-//  line-height: 36px
-//  select
-//    width: auto
-//    margin: 0
-//    vertical-align: middle
-//    font-size: 1.3em
-//
-//.move-selected-label
-//  color: #444
-//  font-size: 1.3em
-//  vertical-align: middle
-//  margin: 0 10px 0 0
-//
-//#select-media
-//  position: absolute
-//  left: -20px
-//  opacity: 0.001
-//  &:checked
-//    & ~ .table-buttons-flex
-//      .select-media-button
-//        +button($primaryColor, #fff, 1.1em, true, "check")
-//        margin-right: 10px
-//      .move-selected
-//        display: inline-block
-//
-//#select-media
-//  &:checked
-//    & ~ .media-nav
-//      .media-container
-//        .media-links
-//          display: none
-//        .expand-label
-//          a
-//            display: none
-//          .move-span
-//            display: block
-//
-//.select-media-button
-//  +button(#fcfcfc, #444, 1.1em, true, "check")
-//
-//.move-button
-//  +icon("arrow-circle-right")
-//  border: none
-//  background: none
-//  font-size: 2.2em
-//  margin-left: 6px
-//  cursor: pointer
-//  vertical-align: middle
+.folder-link, .media-link
+  &:before
+    @extend .fa
+    width: 15px
+    display: inline-block
+    margin-right: 4px
+
+.folder-link
+  @extend .fa-folder
+  font-weight: 900
+  color: #444
+
+.media-link
+  @extend .fa-file-o
+  display: block
+  padding: 0 20px
+  margin-left: -10px !important
+  width: calc(100% + 20px)
+  b, i
+    display: inline-block
+  i
+    &:before
+      display: inline-block
+      margin: 0 5px
+      content: "-"
+
+  &[alt$=".jpg"], &[alt$=".jpeg"], &[alt$=".png"], &[alt="Image"]
+    @extend .fa-file-picture-o
+  &[alt$=".pdf"], &[alt="PDF"]
+    @extend .fa-file-pdf-o
+  &[alt$=".mp4"], &[alt="Video"]
+    @extend .fa-file-video-o
+  &[alt$=".com"], &[alt$=".edu"], &[alt$=".org"], &[alt="Web link"]
+    @extend .fa-globe
+  &.expired
+    &:before
+      content: "\f071"
+
+.modal-input, .asset-input
+  &:checked
+    & ~ .media-link
+      background: $red
+      color: #fff
+      @extend .fa-check
+
+.dsml-media-nest
+  list-style: none
+  width: 100%
+  display: block
+  display: none
+  li
+    padding-left: 20px
+
+.dsml-expand-input
+  position: absolute
+  z-index: 4
+  cursor: pointer
+  opacity: 0.001
+  &:checked
+    & ~ .dsml-media-nest
+      display: block
+    & + .dsml-media-container
+      .folder-link
+        @extend .fa-folder-open
+
+.modal-content
+  .media-links
+    display: none
+
+// OPEN ALL
+
+#open-all
+  position: absolute
+  left: -20px
+
+.dsml-open-all-label
+  +dsml-button(#fcfcfc, #444, 1.1em, true, "folder-open")
+
+// SEARCH MEDIA
+
+#dsml-search_media
+  margin: 10px 0 0
+
+// SELECT MEDIA
+
+.move-input
+  position: absolute
+  left: -20px
+  opacity: 0.001
+  &:checked
+    & + .dsml-expand-label
+      span.media-link
+        background: $red
+        color: #fff
+        @extend .fa-check
+
+.dsml-move-selected
+  display: none
+  vertical-align: top
+  float: none
+  margin: 0
+  width: auto
+  line-height: 36px
+  select
+    width: auto
+    margin: 0
+    vertical-align: middle
+    font-size: 1.3em
+
+.dsml-move-selected-label
+  color: #444
+  font-size: 1.3em
+  vertical-align: middle
+  margin: 0 10px 0 0
+
+#dsml-select-media
+  position: absolute
+  left: -20px
+  opacity: 0.001
+  &:checked
+    & ~ .dsml-table-buttons-flex
+      .dsml-select-media-button
+        +dsml-button($primaryColor, #fff, 1.1em, true, "check")
+        margin-right: 10px
+      .move-selected
+        display: inline-block
+
+#dsml-select-media
+  &:checked
+    & ~ .dsml-media-nav
+      .dsml-media-container
+        .media-links
+          display: none
+        .dsml-expand-label
+          a
+            display: none
+          .move-span
+            display: block
+
+.dsml-select-media-button
+  +dsml-button(#fcfcfc, #444, 1.1em, true, "check")
+
+.dsml-move-button
+  +dsml-icon("arrow-circle-right")
+  border: none
+  background: none
+  font-size: 2.2em
+  margin-left: 6px
+  cursor: pointer
+  vertical-align: middle
+
+input.dsml-text
+  @extend %dsml-generic-input
 

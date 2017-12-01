@@ -1,10 +1,10 @@
 li
-  input.expand-input type="checkbox" id="#{helper.field}-folder-#{folder.id}"
-  .media-container
-    label.expand-label.folder-link for="#{helper.field}-folder-#{folder.id}" = folder.name
+  input.dsml-expand-input type="checkbox" id="#{helper.field}-folder-#{folder.id}"
+  .dsml-media-container
+    label.dsml-expand-label.folder-link for="#{helper.field}-folder-#{folder.id}" = folder.name
 
   - if folder.children.any? || folder.resources.any?
-    ul.media-nest
+    ul.dsml-media-nest
       = render collection: folder.children, partial: "ds_media_library/form_helper/folder", as: :folder, locals: { helper: helper }
       = render collection: folder.resources, partial: "ds_media_library/form_helper/resource", as: :resource, locals: { helper: helper }
 
