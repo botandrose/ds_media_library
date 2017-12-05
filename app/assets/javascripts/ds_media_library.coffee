@@ -14,41 +14,40 @@ class MediaLibrary
     @$el.on "change", "[name=ds_media_library]:radio", => @closeModal()
     @$target = $("#dsml-selected-media-" + baseId)
     @$modalToggle = $("#" + baseId)
-    @$modalToggle.change (event) =>
-      if event.target.checked
-        @$el.find("[data-load-url]").each (index, el)->
-          url = $(el).attr("data-load-url")
-          $(el).removeAttr("data-load-url").load(url)
-      else
-        @showPreviews()
+    @$modalToggle.change (event) => @modalToggle(event.target.checked)
     @showPreviews()
 
   closeModal: ->
     @$modalToggle.prop(checked: false).change()
 
+  modalToggle: (shouldOpen) ->
+    if shouldOpen
+      @$el.find("[data-load-url]").each (index, el)->
+        url = $(el).attr("data-load-url")
+        $(el).removeAttr("data-load-url").load(url)
+    else
+      @showPreviews()
+
   showPreviews: ->
     @$target.empty()
-    previews = @$el.find("[name=ds_media_library]:checked").map (index, resource) =>
-      @renderTemplate
-        index: index + 1
-        id: $(resource).attr("value")
-        type: $(resource).attr("data-type")
-        url: $(resource).attr("data-url")
-        filename: $(resource).attr("data-filename")
-    previews = previews.toArray().sort (a,b) => @sortPreviews(a,b)
+    selectedMedia = @$el.find("[name=ds_media_library]:checked").toArray()
+    contexts = selectedMedia.map (resource, index) => @createContext(resource, index)
+    sortedContexts = contexts.sort (a,b) => @sortContexts(a,b)
+    previews = sortedContexts.map (context) => @renderTemplate context
     @$target.append previews.join("\n")
     @$target.sortable()
 
-  sortPreviews: (a, b) ->
-    aId = @extractId(a)
-    bId = @extractId(b)
-    if @ids.indexOf(aId) < @ids.indexOf(bId)
+  createContext: (resource, index) ->
+    context = $(resource).data()
+    context.index = index + 1
+    context.id = $(resource).attr("value")
+    context
+
+  sortContexts: (a, b) ->
+    if @ids.indexOf(a.id) < @ids.indexOf(b.id)
       -1
     else
       1
-
-  extractId: (html) ->
-    parseInt(html.match(/value="(\d+)"/)[1])
 
   renderTemplate: (context) ->
     template = @template
