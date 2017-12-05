@@ -4,7 +4,7 @@ module DSMediaLibrary
 
     def index
       helper = FormHelper::MediaLibrary.from_params(params)
-      render "ds_media_library/form_helper/show", locals: { helper: helper}
+      render "ds_media_library/form_helper/show", locals: { helper: helper}, layout: false
     end
 
     def new
