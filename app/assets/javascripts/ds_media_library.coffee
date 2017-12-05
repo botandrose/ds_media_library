@@ -67,12 +67,12 @@ $ ->
   resourceSelector = $("[data-search-media]").attr("data-search-media")
   $("#dsml-search-media").keyup (event) ->
     $tree = $(this).siblings("#dsml-media-tree")
-    term = event.target.value
+    term = event.target.value.toLowerCase()
 
     if term.length > 0
       $tree.find(folderSelector).prop checked: true
       $tree.find(resourceSelector).each ->
-        labelText = $(this).find("label").text()
+        labelText = $(this).find("label").text().toLowerCase()
         isFound = labelText.indexOf(term) != -1
         $(this).toggle isFound
 
