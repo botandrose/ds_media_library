@@ -62,3 +62,20 @@ $ ->
     $checkboxes = $($(this).attr("data-toggle-all-checkboxes"))
     $checkboxes.prop checked: !$checkboxes.is(":checked")
 
+$ ->
+  folderSelector = $("[data-toggle-all-checkboxes]").attr("data-toggle-all-checkboxes")
+  resourceSelector = $("[data-search-media]").attr("data-search-media")
+  $("#dsml-search-media").keyup (event) ->
+    $tree = $(this).siblings("#dsml-media-tree")
+    term = event.target.value
+
+    if term.length > 0
+      $tree.find(folderSelector).prop checked: true
+      $tree.find(resourceSelector).each ->
+        labelText = $(this).find("label").text()
+        isFound = labelText.indexOf(term) != -1
+        $(this).toggle isFound
+
+    else
+      $tree.find(resourceSelector).show()
+

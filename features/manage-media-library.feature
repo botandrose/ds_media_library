@@ -109,6 +109,13 @@ Feature: Manage media library
       | - example.mp4   |
       | Example folder  |
 
+  Scenario: Search media
+    When I fill in "Search media library" with "mp4"
+    Then I should see the following media tree:
+      | Another folder  |
+      | Example folder  |
+      | - example.mp4   |
+
   Scenario: (Soft) Delete media
     When I follow "Widget"
     And I open the media library for the "Cat picture"
