@@ -10,8 +10,8 @@ class MediaLibrary
   constructor: (@$el) ->
     baseId = @$el.attr("data-media-library")
     @ids = JSON.parse(@$el.attr("data-media-library-ids"))
-    @$el.find("[name=ds_media_library]:radio").change => @closeModal()
     @template = @$el.find("#dsml-media-preview-template")[0].innerHTML
+    @$el.on "change", "[name=ds_media_library]:radio", => @closeModal()
     @$target = $("#dsml-selected-media-" + baseId)
     @$modalToggle = $("#" + baseId)
     @$modalToggle.change (event) =>
@@ -57,15 +57,15 @@ class MediaLibrary
     template
 
 $ ->
-  $("[data-toggle-all-checkboxes]").click (event) ->
+  $("body").on "click", "[data-toggle-all-checkboxes]", (event) ->
     event.preventDefault()
     $checkboxes = $($(this).attr("data-toggle-all-checkboxes"))
     $checkboxes.prop checked: !$checkboxes.is(":checked")
 
 $ ->
-  folderSelector = $("[data-toggle-all-checkboxes]").attr("data-toggle-all-checkboxes")
-  resourceSelector = $("[data-search-media]").attr("data-search-media")
-  $("#dsml-search-media").keyup (event) ->
+  $("body").on "keyup", "#dsml-search-media", (event) ->
+    folderSelector = $("[data-toggle-all-checkboxes]").attr("data-toggle-all-checkboxes")
+    resourceSelector = $("[data-search-media]").attr("data-search-media")
     $tree = $(this).siblings("#dsml-media-tree")
     term = event.target.value.toLowerCase()
 
