@@ -1,8 +1,8 @@
 - if !defined?(preview) then preview = true
 
 - if image.present?
-  dfn.preview-form
-    .preview-wrapper
+  dfn.dsml-preview-form
+    .dsml-preview-wrapper
       - if preview
         - if image.video?
           = video_tag image.url, controls: true

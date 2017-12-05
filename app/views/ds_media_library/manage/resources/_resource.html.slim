@@ -1,11 +1,11 @@
 li.dsml-resource class=("hidden" if resource.hidden?)
   .dsml-media-container
-    input.move-input type="checkbox" name="resource_ids[]" id="media-#{resource.id}" value=resource.id
+    input.dsml-move-input type="checkbox" name="resource_ids[]" id="media-#{resource.id}" value=resource.id
     label.dsml-expand-label for="media-#{resource.id}"
       = link_to resource.original_file_name, edit_resource_path(resource), class: resource.css_class, alt: resource.original_file_name
-      / span.move-span.media-link alt=resource.original_file_name = resource.original_file_name
+      span.dsml-move-span.media-link alt=resource.original_file_name = resource.original_file_name
 
-    .media-links
+    .dsml-media-links
       = link_to "Edit media", edit_resource_path(resource), class: "dsml-edit-icon", title: "Edit media"
       = link_to "Delete media", resource_path(resource), method: :delete, class: "dsml-delete-icon", title: "Delete media",
         data: { confirm: "Are you sure you want to delete this media item? Note that this will just remove it from the media library." }

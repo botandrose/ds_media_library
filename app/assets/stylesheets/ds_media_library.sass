@@ -17,16 +17,27 @@ $default: Helvetica, sans-serif
 // IMPORTS
 
 @import font-awesome
+@import "placeholders"
 @import "mixins/buttons"
 @import "mixins/icons"
-@import "dsml"
+@import "mixins/notification-text"
+
+@import "breadcrumb-nav"
+@import "help-text"
+@import "media-tree"
+@import "modal"
+@import "preview-media"
 
 //
 
 body
   font: 300 62.5% $default
 
-.hidden
+.dsml *
+  box-sizing: border-box
+  position: relative
+
+.dsml .hidden
   display: none
 
 .dsml-media-nest
@@ -35,171 +46,32 @@ body
 .dsml-expand-input:checked ~ .dsml-media-nest
   display: block
 
-.media-button, .flash-notice, .flash-alert
+.dsml-media-button, .flash-notice, .flash-alert
   text-transform: uppercase
 
-.modal-input
-  opacity: 0.001
-  &:checked ~ .modal-wrapper
-    left: 0
-    opacity: 1
-    .modal-content
+// FORM ELEMENTS
+
+.dsml-label
+  color: $primaryColor
+  display: block
+  font: 700 $font-size $default
+  margin-bottom: 8px
+  &.dsml-optional
+    &:after
+      content: "(optional)"
+      color: #999
+      font-size: 0.8em
       display: inline-block
-    .modal-bg
-      background: white
-      opacity: 1
-
-.modal-wrapper
-  position: fixed
-  display: -webkit-flex
-  display: flex
-  top: 0
-  left: -100vw
-  width: 100vw
-  height: 100vh
-  z-index: 9999
-  text-align: left
-
-.modal-bg
-  background: rgba(#808080, 0.85)
-  opacity: 0
-  position: absolute
-  z-index: 2
-  width: 100vw
-  height: 100vh
-  top: 0
-  left: 0
-
-.modal-content
-  display: none
-  margin: auto 0
-  width: 94vw
-  height: 100vh
-  padding: 40px
-  z-index: 3
-
-.modal-close
-  position: absolute
-  top: -10px
-  right: 40px
-  margin: 0
-  width: 40px
-  height: 40px
-  line-height: 40px
-  text-align: center
-
-//
-
-$itemHeight: 40px
-
-.dsml-media-nav
-  @extend %dsml-reset-list
-  width: 100%
-  margin: 25px 0 0
-  font: $font-weight 1.4em $default
-  li
-    margin: 2px 0
-  .dsml-media-nest
-    margin: 0
-
-.dsml-media-container
-  display: flex
-  width: 100%
-  border: 1px solid #e0e0e0
-  line-height: $itemHeight
-  flex-wrap: wrap
-  padding: 0 10px
-  .dsml-expand-label, .media-links
-    display: inline-block
-    vertical-align: middle
-    margin: 0
-  .dsml-expand-label
-    flex-grow: 1
-    font-size: 1em
-    line-height: $itemHeight
-    cursor: pointer
-    a
-      display: block
-    .move-span
-      display: none
-  .filename
+      margin-left: 4px
+      font-style: italic
+      font-weight: 200
+  em
     color: #666
+  & + span, & + p
     display: inline-block
-    border: 1px dashed red
-  .media-links
-    flex-basis: 80px
-    text-align: right
-  &:hover
-    background: lighten($yellow, 50%)
-
-.folder-link, .media-link
-  &:before
-    @extend .fa
-    width: 15px
-    display: inline-block
-    margin-right: 4px
-
-.folder-link
-  @extend .fa-folder
-  font-weight: 900
-  color: #444
-
-.media-link
-  @extend .fa-file-o
-  display: block
-  padding: 0 20px
-  margin-left: -10px !important
-  width: calc(100% + 20px)
-  b, i
-    display: inline-block
-  i
-    &:before
-      display: inline-block
-      margin: 0 5px
-      content: "-"
-
-  &[alt$=".jpg"], &[alt$=".jpeg"], &[alt$=".png"], &[alt="Image"]
-    @extend .fa-file-picture-o
-  &[alt$=".pdf"], &[alt="PDF"]
-    @extend .fa-file-pdf-o
-  &[alt$=".mp4"], &[alt="Video"]
-    @extend .fa-file-video-o
-  &[alt$=".com"], &[alt$=".edu"], &[alt$=".org"], &[alt="Web link"]
-    @extend .fa-globe
-  &.expired
-    &:before
-      content: "\f071"
-
-.modal-input, .asset-input
-  &:checked
-    & ~ .media-link
-      background: $red
-      color: #fff
-      @extend .fa-check
-
-.dsml-media-nest
-  list-style: none
-  width: 100%
-  display: block
-  display: none
-  li
-    padding-left: 20px
-
-.dsml-expand-input
-  position: absolute
-  z-index: 4
-  cursor: pointer
-  opacity: 0.001
-  &:checked
-    & ~ .dsml-media-nest
-      display: block
-    & + .dsml-media-container
-      .folder-link
-        @extend .fa-folder-open
-
-.modal-content
-  .media-links
-    display: none
+    margin: 0
+    font-size: $font-size
+    line-height: 1.2em
 
 // OPEN ALL
 
@@ -215,74 +87,38 @@ $itemHeight: 40px
 #dsml-search_media
   margin: 10px 0 0
 
-// SELECT MEDIA
-
-.move-input
-  position: absolute
-  left: -20px
-  opacity: 0.001
-  &:checked
-    & + .dsml-expand-label
-      span.media-link
-        background: $red
-        color: #fff
-        @extend .fa-check
-
-.dsml-move-selected
-  display: none
-  vertical-align: top
-  float: none
-  margin: 0
-  width: auto
-  line-height: 36px
-  select
-    width: auto
-    margin: 0
-    vertical-align: middle
-    font-size: 1.3em
-
-.dsml-move-selected-label
-  color: #444
-  font-size: 1.3em
-  vertical-align: middle
-  margin: 0 10px 0 0
-
-#dsml-select-media
-  position: absolute
-  left: -20px
-  opacity: 0.001
-  &:checked
-    & ~ .dsml-table-buttons-flex
-      .dsml-select-media-button
-        +dsml-button($primaryColor, #fff, 1.1em, true, "check")
-        margin-right: 10px
-      .move-selected
-        display: inline-block
-
-#dsml-select-media
-  &:checked
-    & ~ .dsml-media-nav
-      .dsml-media-container
-        .media-links
-          display: none
-        .dsml-expand-label
-          a
-            display: none
-          .move-span
-            display: block
-
-.dsml-select-media-button
-  +dsml-button(#fcfcfc, #444, 1.1em, true, "check")
-
-.dsml-move-button
-  +dsml-icon("arrow-circle-right")
-  border: none
-  background: none
-  font-size: 2.2em
-  margin-left: 6px
-  cursor: pointer
-  vertical-align: middle
-
 input.dsml-text
   @extend %dsml-generic-input
+  margin: 10px 0 0
+
+// TABLE BUTTONS
+
+.dsml-media-button
+  +dsml-button(#f6f6f6, #444, 1.1em)
+  padding: 0 10px
+  margin-left: 5px
+  & + em
+    margin: 0 5px
+
+.dsml-table-buttons
+  text-align: right
+  clear: both
+  a
+    margin-left: 10px
+
+.dsml-add-button
+  +dsml-button($teal, #fcfcfc, 1.1em, true, "plus")
+
+.dsml-table-buttons-flex
+  display: flex
+  clear: both
+.dsml-buttons-right
+  text-align: right
+  a
+    margin-left: 10px
+.dsml-buttons-left
+  flex: 1 0
+  a, label
+    margin-right: 10px
+    display: inline-block
 

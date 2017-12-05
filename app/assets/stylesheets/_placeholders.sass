@@ -1,0 +1,43 @@
+%dsml-reset-list
+  margin: 0
+  padding: 0
+  list-style: none
+  li
+    margin: 0
+    padding: 0
+
+%dsml-generic-input
+  font: 200 $font-size $default
+  width: 100%
+  line-height: 2em
+  max-height: 40px
+  padding: 0 0 0 6px
+  border: 1px solid #d0d0d0
+  background: #fff
+  box-shadow: #ccc 0 1px 4px 0 inset
+  border-radius: 2px
+  &::-webkit-input-placeholder
+    color: #999
+  &:-moz-placeholder
+    color: #999
+  &::-moz-placeholder
+    color: #999
+  &:-ms-input-placeholder
+    color: #999
+  &:focus
+    outline-color: $primaryColor
+    &::-webkit-input-placeholder
+      color: transparent
+    &:-moz-placeholder
+      color: transparent
+    &::-moz-placeholder
+      color: transparent
+    &:-ms-input-placeholder
+      color: transparent
+  &.sm-input
+    width: 100px
+  & + p
+    display: inline-block
+    color: #666
+    font-size: 1.2em
+    margin: 0 0 0 5px

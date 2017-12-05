@@ -4,15 +4,15 @@
   - if helper.helptext
     .ratio-text = helper.helptext
 
-  label.media-button for=helper.html_id Media library
+  label.dsml-media-button for=helper.html_id Media library
   em or
   = form.file_field helper.file_field_name, multiple: helper.multiple
 
-  input.modal-input type="checkbox" id=helper.html_id
-  .modal-wrapper
-    .modal-bg
-    .modal-content
-      label.modal-close for=helper.html_id
+  input.dsml-modal-input type="checkbox" id=helper.html_id
+  .dsml-modal-wrapper
+    .dsml-modal-bg
+    .dsml-modal-content
+      label.dsml-modal-close for=helper.html_id
         .borders
       .media-wrapper data-load-url=ds_media_library.folders_path(helper.to_h)
         - helper.selected_resources.each do |resource|
@@ -21,8 +21,8 @@
   dl.playlist-media id="dsml-selected-media-#{helper.html_id}"
 
   script#dsml-media-preview-template type="text/x-html-template"
-    dfn.preview-form
-      .preview-wrapper
+    dfn.dsml-preview-form
+      .dsml-preview-wrapper
         - if helper.preview
           | <{{type}} src="{{url}}" controls=true />
 

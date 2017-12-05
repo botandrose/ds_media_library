@@ -41,11 +41,11 @@ SLIM
 InMemoryResolver.store["application/show"] = <<-SLIM
   = form_for @widget, url: "/" do |form|
     .field
-      = form.label :cat_picture
+      = form.label :cat_picture, class: "dsml-label"
       = form.media_library :cat_picture
 
     .field
-      = form.label :dog_pictures
+      = form.label :dog_pictures, class: "dsml-label"
       = form.media_library :dog_pictures, multiple: true
 
     = form.submit "Save"

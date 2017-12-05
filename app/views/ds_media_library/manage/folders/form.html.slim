@@ -1,5 +1,5 @@
 = content_for :breadcrumbs do
-  ul.breadcrumb-nav
+  ul.dsml-breadcrumb-nav
     li = link_to "Media Library", :root
     li
       = folder.new_record? ? "New" : "Edit"
@@ -8,12 +8,12 @@
 
 = form_for folder do |form|
   fieldset
-    .field
-      = form.label :parent_id, "Parent folder", class: "optional"
+    .dsml-field
+      = form.label :parent_id, "Parent folder", class: "dsml-optional"
       = form.collection_select :parent_id, form.object.all_folders, :id, :name, include_blank: " -- none -- "
-    .field
+    .dsml-field
       = form.label :name, "Folder name"
-      = form.text_field :name, class: "name-input"
+      = form.text_field :name, class: "dsml-name-input"
 
   = render "ds_media_library/manage/submit", name: "folder"
 

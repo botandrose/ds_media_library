@@ -1,0 +1,84 @@
+.dsml-stacked-preview
+  .dsml-preview-form
+    display: inline-block
+
+.dsml-preview-form
+  display: block
+  margin-top: 10px
+  font-size: 1em
+  img, video
+    & ~ input
+      & + label
+        top: 5px
+        right: 5px
+        width: 30px
+        height: 30px
+        line-height: 30px
+        font-size: 2em
+  input
+    position: absolute
+    opacity: 0.001
+    &:checked
+      & + label, & + label:hover
+        background: $red
+        &:before
+          color: #fff
+    & + label
+      @extend .fa-trash
+      cursor: pointer
+      width: 20px
+      height: 20px
+      line-height: 20px
+      margin: 0
+      box-shadow: #333 0 0 2px
+      border-radius: 2px
+      background: rgba(#fff, 0.5)
+      text-align: center
+      font-size: 1.4em
+      position: absolute
+      right: -25px
+      top: -4px
+      &:before
+        @extend .fa
+        display: inline-block
+        color: rgba(#000, 0.8)
+      &:hover
+        background: rgba(#fff, 0.6)
+        &:before
+          color: #000
+  span
+    color: transparent
+    display: inline-block
+    text-indent: -9999px
+    width: 0px
+  figcaption
+    font-size: 1.2em
+    color: #999
+
+.dsml-preview-wrapper
+  display: inline-block
+  dt
+    display: block
+
+.dsml-remove-asset
+  display: inline-block
+  input
+    position: absolute
+    opacity: 0.001
+    left: -15px
+    z-index: 1
+    &:checked
+      & + label, & + label:hover
+        &:before
+          color: $red
+    & + label
+      @extend .fa-trash
+      cursor: pointer
+      margin: 0
+      &:before
+        @extend .fa
+        display: inline-block
+        color: rgba(#444, 0.8)
+      &:hover
+        &:before
+          color: #444

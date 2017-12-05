@@ -1,0 +1,25 @@
+.dsml-breadcrumb-nav
+  @extend %dsml-reset-list
+  padding: 10px 40px
+  border-bottom: 1px solid #efefef
+  background: #fafafa
+  li
+    font: 300 0.9em $default
+    color: #101010
+    display: inline-block
+    text-transform: uppercase
+    &:before
+      display: none
+    &:after
+      content: "→"
+      margin: 0 5px
+      display: inline-block
+      color: #101010
+    &:last-child
+      &:after
+        display: none
+  a
+    color: #101010
+    border-bottom: 1px dashed #101010
+    &:hover
+      border-color: #101010
