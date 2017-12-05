@@ -87,6 +87,6 @@ Then "I should see {string} checked" do |field|
 end
 
 When "I close the modal window" do
-  find(".modal-close").click
+  find(".dsml-modal-close").click
 end
 
