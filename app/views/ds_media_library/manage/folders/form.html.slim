@@ -8,10 +8,10 @@
 
 = form_for folder do |form|
   fieldset
-    .dsml-field
+    .field
       = form.label :parent_id, "Parent folder", class: "dsml-optional"
       = form.collection_select :parent_id, form.object.all_folders, :id, :name, include_blank: " -- none -- "
-    .dsml-field
+    .field
       = form.label :name, "Folder name"
       = form.text_field :name, class: "dsml-name-input"
 
