@@ -112,9 +112,14 @@ Feature: Manage media library
   Scenario: Search media (case-insensitive)
     When I fill in "Search media library" with "Mp4"
     Then I should see the following media tree:
-      | Another folder  |
       | Example folder  |
       | - example.mp4   |
+
+    When I clear the "Search media library" field
+    Then I should see the following media tree:
+      | Another folder  |
+      | Example folder  |
+      | example.jpg     |
 
   Scenario: (Soft) Delete media
     When I follow "Widget"

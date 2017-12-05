@@ -48,6 +48,13 @@ When "I fill in {string} with {string}" do |field, value|
   fill_in field, with: value
 end
 
+When "I clear the {string} field" do |label|
+  field = find_field(label)
+  field.value.length.times do
+    field.send_keys :backspace
+  end
+end
+
 When "I press {string}" do |button|
   click_button button
 end

@@ -71,11 +71,17 @@ $ ->
 
     if term.length > 0
       $tree.find(folderSelector).prop checked: true
+
       $tree.find(resourceSelector).each ->
         labelText = $(this).find("label").text().toLowerCase()
         isFound = labelText.indexOf(term) != -1
         $(this).toggle isFound
 
+      $tree.find(folderSelector).each ->
+        hasFoundResource = $(this).parent().find(resourceSelector).length > 0
+        $(this).parent().toggle hasFoundResource
+
     else
-      $tree.find(resourceSelector).show()
+      $tree.find(folderSelector).prop checked: false
+      $tree.find("li").show()
 
