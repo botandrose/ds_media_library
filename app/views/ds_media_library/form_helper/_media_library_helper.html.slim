@@ -16,11 +16,11 @@
         .borders
       .media-wrapper data-load-url=ds_media_library.folders_path(helper.to_h)
         - helper.selected_resources.each do |resource|
-          input.media-choice type="checkbox" value=resource.id checked=true data-url=resource.url data-type=(resource.video? ? "video" : "image") data-filename=resource.original_file_name
+          input.media-choice name="ds_media_library" type="checkbox" value=resource.id checked=true data-url=resource.url data-type=(resource.video? ? "video" : "image") data-filename=resource.original_file_name
 
-  dl.playlist-media id="selected_media_#{helper.html_id}"
+  dl.playlist-media id="dsml-selected-media-#{helper.html_id}"
 
-  script.media-preview-template type="text/x-html-template"
+  script#dsml-media-preview-template type="text/x-html-template"
     dfn.preview-form
       .preview-wrapper
         - if helper.preview

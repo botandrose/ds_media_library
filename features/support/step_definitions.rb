@@ -37,7 +37,7 @@ Then "I should see the following media tree:" do |table|
     structure
   end
 
-  table.diff! recurse_tree(find(".media-nav"))
+  table.diff! recurse_tree(find("#dsml-media-tree"))
 end
 
 When "I select {string} from {string}" do |value, field|

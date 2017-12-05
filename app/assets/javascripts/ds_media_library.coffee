@@ -10,9 +10,9 @@ class MediaLibrary
   constructor: (@$el) ->
     baseId = @$el.attr("data-media-library")
     @ids = JSON.parse(@$el.attr("data-media-library-ids"))
-    @$el.find(".media-choice:radio").change => @closeModal()
-    @template = @$el.find(".media-preview-template")[0].innerHTML
-    @$target = $("#selected_media_" + baseId)
+    @$el.find("[name=ds_media_library]:radio").change => @closeModal()
+    @template = @$el.find("#dsml-media-preview-template")[0].innerHTML
+    @$target = $("#dsml-selected-media-" + baseId)
     @$modalToggle = $("#" + baseId)
     @$modalToggle.change (event) =>
       if event.target.checked
@@ -28,7 +28,7 @@ class MediaLibrary
 
   showPreviews: ->
     @$target.empty()
-    previews = @$el.find(".media-choice:checked").map (index, resource) =>
+    previews = @$el.find("[name=ds_media_library]:checked").map (index, resource) =>
       @renderTemplate
         index: index + 1
         id: $(resource).attr("value")
