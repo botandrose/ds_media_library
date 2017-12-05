@@ -18,7 +18,7 @@
         - helper.selected_resources.each do |resource|
           input name="ds_media_library" type="checkbox" value=resource.id checked=true data=resource.attributes
 
-  dl.playlist-media id="dsml-selected-media-#{helper.html_id}"
+  dl.dsml-playlist-media id="dsml-selected-media-#{helper.html_id}"
 
   script#dsml-media-preview-template type="text/x-html-template"
     dfn.dsml-preview-form

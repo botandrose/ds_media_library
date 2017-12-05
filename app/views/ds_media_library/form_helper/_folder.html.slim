@@ -1,7 +1,7 @@
 li
   input.dsml-expand-input type="checkbox" id="#{helper.field}-folder-#{folder.id}"
   .dsml-media-container
-    label.dsml-expand-label.folder-link for="#{helper.field}-folder-#{folder.id}" = folder.name
+    label.dsml-expand-label.dsml-folder-link for="#{helper.field}-folder-#{folder.id}" = folder.name
 
   - if folder.children.any? || folder.resources.any?
     ul.dsml-media-nest

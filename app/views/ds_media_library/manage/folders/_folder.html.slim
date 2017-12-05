@@ -1,7 +1,7 @@
 li.dsml-folder
   input type="checkbox" class="dsml-expand-input" id="folder-#{folder.id}"
   .dsml-media-container
-    label.dsml-expand-label.folder-link for="folder-#{folder.id}" = folder.name
+    label.dsml-expand-label.dsml-folder-link for="folder-#{folder.id}" = folder.name
     .dsml-media-links
       = link_to "Edit folder", [:edit, folder], class: "dsml-edit-icon", title: "Edit folder"
       = link_to "Delete folder", folder, method: :delete, class: "dsml-delete-icon", title: "Delete folder",

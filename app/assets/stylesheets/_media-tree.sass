@@ -19,7 +19,7 @@ $itemHeight: 40px
   line-height: $itemHeight
   flex-wrap: wrap
   padding: 0 10px
-  .dsml-expand-label, .media-links
+  .dsml-expand-label, .dsml-media-links
     display: inline-block
     vertical-align: middle
     margin: 0
@@ -36,25 +36,25 @@ $itemHeight: 40px
     color: #666
     display: inline-block
     border: 1px dashed red
-  .media-links
+  .dsml-media-links
     flex-basis: 80px
     text-align: right
   &:hover
     background: lighten($yellow, 50%)
 
-.folder-link, .media-link
+.dsml-folder-link, .dsml-media-link
   &:before
     @extend .fa
     width: 15px
     display: inline-block
     margin-right: 4px
 
-.folder-link
+.dsml-folder-link
   @extend .fa-folder
   font-weight: 900
   color: #444
 
-.media-link
+.dsml-media-link
   @extend .fa-file-o
   display: block
   padding: 0 20px
@@ -79,9 +79,9 @@ $itemHeight: 40px
     &:before
       content: "\f071"
 
-.modal-input, .asset-input
+.dsml-modal-input, .dsml-asset-input
   &:checked
-    & ~ .media-link
+    & ~ .dsml-media-link
       background: $red
       color: #fff
       @extend .fa-check
@@ -103,7 +103,7 @@ $itemHeight: 40px
     & ~ .dsml-media-nest
       display: block
     & + .dsml-media-container
-      .folder-link
+      .dsml-folder-link
         @extend .fa-folder-open
 
 .dsml-modal-content
@@ -118,7 +118,7 @@ $itemHeight: 40px
   opacity: 0.001
   &:checked
     & + .dsml-expand-label
-      span.media-link
+      span.dsml-media-link
         background: $red
         color: #fff
         @extend .fa-check

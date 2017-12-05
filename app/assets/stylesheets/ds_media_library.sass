@@ -33,9 +33,10 @@ $default: Helvetica, sans-serif
 body
   font: 300 62.5% $default
 
-.dsml *
-  box-sizing: border-box
-  position: relative
+.dsml
+  *
+    box-sizing: border-box
+    position: relative
 
 .dsml .hidden
   display: none
@@ -99,6 +100,19 @@ input.dsml-text
   margin-left: 5px
   & + em
     margin: 0 5px
+
+.dsml-media-wrapper
+  overflow: auto
+  height: 100%
+
+input[multiple="multiple"]
+  & ~ .dsml-playlist-media
+    display: flex
+    flex-wrap: wrap
+    justify-content: flex-start
+    .dsml-preview-form
+      flex: 0 1 32%
+      margin: 10px 1% 0 0
 
 .dsml-table-buttons
   text-align: right
