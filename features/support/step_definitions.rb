@@ -63,6 +63,10 @@ Then "I should see {string}" do |text|
   expect(page).to have_text(text)
 end
 
+Then "I should not see {string}" do |text|
+  expect(page).to_not have_text(text)
+end
+
 When "I attach the {string} file to {string}" do |path, field|
   attach_file field, "features/support/fixtures/#{path}"
 end
@@ -84,6 +88,10 @@ end
 
 Then "I should see {string} checked" do |field|
   expect(find_field(field)).to be_checked
+end
+
+Then "I should see {string} filled in with {string}" do |field, value|
+  expect(find_field(field).value).to eq(value)
 end
 
 When "I close the modal window" do

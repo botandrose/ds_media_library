@@ -48,6 +48,16 @@ InMemoryResolver.store["application/show"] = <<-SLIM
       = form.label :dog_pictures, class: "dsml-label"
       = form.media_library :dog_pictures, multiple: true
 
+    .field
+      = form.media_library :baby_picture do
+        = form.label :baby_name
+        = form.text_field :baby_name
+
+    .field
+      = form.media_library :embarassing_pictures, multiple: true, preview: false do
+        label for="resource_{{id}}_context" Embarassing picture {{index}} context
+        input type="text" id="resource_{{id}}_context" name="resources[{{id}}][context]" value="{{context}}"
+
     = form.submit "Save"
 SLIM
 

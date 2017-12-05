@@ -16,7 +16,7 @@
         .borders
       .media-wrapper data-load-url=ds_media_library.folders_path(helper.to_h)
         - helper.selected_resources.each do |resource|
-          input.media-choice name="ds_media_library" type="checkbox" value=resource.id checked=true data-url=resource.url data-type=(resource.video? ? "video" : "image") data-filename=resource.original_file_name
+          input name="ds_media_library" type="checkbox" value=resource.id checked=true data=resource.attributes
 
   dl.playlist-media id="dsml-selected-media-#{helper.html_id}"
 
@@ -39,7 +39,9 @@
             = form.label helper.remove_field_name do
               span Remove #{helper.label.downcase}
 
+        = yield if block_given?
+
         dt
           figcaption
-            | {{filename}}
+            | {{resourcesoriginalfilename}}
 

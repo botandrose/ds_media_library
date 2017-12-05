@@ -38,10 +38,19 @@ class MediaLibrary
     @$target.sortable()
 
   createContext: (resource, index) ->
-    context = $(resource).data()
+    context = @extractContext(resource)
     context.index = index + 1
+    context.type = if context.resourcestype == "v" then "video" else "img"
+    context.url = "/assets/" + context.resourcespath + context.resourcesfilename
     context.id = $(resource).attr("value")
     context
+
+  extractContext: (resource) ->
+    obj = {}
+    for attr in resource.attributes
+      if attr.specified and /^data-/.test(attr.name)
+        obj[attr.name.slice(5)] = attr.value
+    obj
 
   sortContexts: (a, b) ->
     if @ids.indexOf(a.id) < @ids.indexOf(b.id)

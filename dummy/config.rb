@@ -32,6 +32,9 @@ class ApplicationController < ActionController::Base
     widget = Widget.first_or_create!
     widget_params = params.require(:widget).permit!
     widget.update! widget_params
+
+    DSNode::Resource.update(params[:resources].keys, params[:resources].values) if params[:resources]
+
     redirect_to "/", notice: "Widget updated"
   end
 end

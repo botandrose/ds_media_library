@@ -88,6 +88,37 @@ Feature: Use media library in forms
     Then I should see "example.jpg" checked
     And I should see "example.mp4" checked
 
+  Scenario: Media library form helper can accept a block
+    When I follow "Widget"
+    Then I should not see "Baby name"
+
+    When I open the media library for the "Baby picture"
+    And I choose "example.jpg"
+    And I fill in "Baby name" with "Cain"
+    And I press "Save"
+    Then I should see "WIDGET UPDATED"
+    And I should see "Baby name" filled in with "Cain"
+
+  Scenario: Media library form helper can accept a block with multiple media
+    When I follow "Widget"
+    Then I should not see "Embarassing picture 1 context"
+
+    When I open the media library for the "Embarassing pictures"
+    And I check "example.jpg"
+    And I check "Example folder"
+    And I check "example.mp4"
+    And I close the modal window
+
+    When I fill in "Embarassing picture 1 context" with "Highschool"
+    And I fill in "Embarassing picture 2 context" with "College"
+    And I press "Save"
+
+    Then I should see "WIDGET UPDATED"
+    And I should see "example.jpg"
+    And I should see "example.mp4"
+    And I should see "Embarassing picture 1 context" filled in with "Highschool"
+    And I should see "Embarassing picture 2 context" filled in with "College"
+
   Scenario: Removing media doesn't remove it from library
     When I attach the "cat.jpg" file to "Cat picture"
     And I press "Save"

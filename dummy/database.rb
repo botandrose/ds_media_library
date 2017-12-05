@@ -13,6 +13,9 @@ ActiveRecord::Migration.suppress_messages do
     create_table "widgets", id: :integer, force: :cascade, options:  "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
       t.integer "cat_picture_id"
       t.string "dog_picture_ids"
+      t.string "baby_picture_id"
+      t.string "baby_name"
+      t.string "embarassing_picture_ids"
     end
 
     create_table "folders", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -44,6 +47,7 @@ ActiveRecord::Migration.suppress_messages do
       t.datetime "updated_at", null: false
       t.integer "folder_id"
       t.boolean "hidden", default: false
+      t.string "context"
     end
   end
 end
@@ -51,5 +55,7 @@ end
 class Widget < ActiveRecord::Base
   ds_resource :cat_picture
   belongs_to_many_ds_resources :dog_pictures
+  ds_resource :baby_picture
+  belongs_to_many_ds_resources :embarassing_pictures
 end
 
