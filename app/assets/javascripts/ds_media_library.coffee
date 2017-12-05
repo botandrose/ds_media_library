@@ -57,15 +57,15 @@ class MediaLibrary
     template
 
 $ ->
-  $("body").on "click", "[data-toggle-all-checkboxes]", (event) ->
+  $("body").on "click", "[data-dsml-toggle-all-checkboxes]", (event) ->
     event.preventDefault()
-    $checkboxes = $($(this).attr("data-toggle-all-checkboxes"))
+    $checkboxes = $($(this).attr("data-dsml-toggle-all-checkboxes"))
     $checkboxes.prop checked: !$checkboxes.is(":checked")
 
 $ ->
   $("body").on "keyup", "#dsml-search-media", (event) ->
-    folderSelector = $("[data-toggle-all-checkboxes]").attr("data-toggle-all-checkboxes")
-    resourceSelector = $("[data-search-media]").attr("data-search-media")
+    folderSelector = $("[data-dsml-toggle-all-checkboxes]").attr("data-dsml-toggle-all-checkboxes")
+    resourceSelector = $("[data-dsml-search-media]").attr("data-dsml-search-media")
     $tree = $(this).siblings("#dsml-media-tree")
     term = event.target.value.toLowerCase()
 

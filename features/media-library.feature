@@ -114,3 +114,16 @@ Feature: Use media library in forms
       | - example.mp4   |
       | example.jpg     |
 
+  Scenario: Search media (case-insensitive)
+    When I open the media library for the "Cat picture"
+    And I fill in "Search media library" with "Mp4"
+    Then I should see the following media tree:
+      | Example folder  |
+      | - example.mp4   |
+
+    When I clear the "Search media library" field
+    Then I should see the following media tree:
+      | Another folder  |
+      | Example folder  |
+      | example.jpg     |
+
