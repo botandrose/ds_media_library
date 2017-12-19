@@ -32,7 +32,7 @@ class MediaLibrary
     @$target.empty()
     selectedMedia = @$el.find("[name=ds_media_library]:checked").toArray()
     contexts = selectedMedia.map (resource, index) => @createContext(resource, index)
-    sortedContexts = contexts.sort (a,b) => @sortContexts(a,b)
+    sortedContexts = contexts.sort (a,b) => @sortContexts(a,b) if @ids.length > 0
     previews = sortedContexts.map (context) => @renderTemplate context
     @$target.append previews.join("\n")
     @$target.sortable()
@@ -42,7 +42,7 @@ class MediaLibrary
     context.index = index + 1
     context.type = if context.resourcestype == "v" then "video" else "img"
     context.url = "/assets/" + context.resourcespath + context.resourcesfilename
-    context.id = $(resource).attr("value")
+    context.id = parseInt($(resource).attr("value"))
     context
 
   extractContext: (resource) ->
