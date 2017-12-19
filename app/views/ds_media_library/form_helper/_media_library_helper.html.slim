@@ -27,9 +27,8 @@
           | <{{type}} src="{{url}}" controls=true />
 
         - if helper.multiple
-          = form.check_box helper.field_id_name, { multiple: true, checked: true }, "{{id}}", nil
-          label
-            = form.check_box helper.remove_field_name, { multiple: true }, "{{id}}", nil
+          = form.check_box helper.field_id_name, { multiple: true, checked: true, id: "#{helper.field_id_name}_{{id}}" }, "{{id}}", nil
+          label for="#{helper.field_id_name}_{{id}}"
             span Remove #{helper.label.downcase.singularize} {{index}}
 
         - else
