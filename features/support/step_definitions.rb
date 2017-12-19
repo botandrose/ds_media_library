@@ -80,6 +80,7 @@ end
 When "I open the media library for the {string}" do |field|
   field = find_field(field)
   field.find(:xpath, "..").find("label", text: "MEDIA LIBRARY").click
+  sleep 0.3 # wait for css animation
 end
 
 When "I choose {string}" do |field|
@@ -94,7 +95,14 @@ Then "I should see {string} filled in with {string}" do |field, value|
   expect(find_field(field).value).to eq(value)
 end
 
+Then "I should see the following {string} media library items:" do |field, table|
+  field = find_field(field)
+  actual = field.find(:xpath, "..").all("dl dt").map { |dt| [dt.text] }
+  table.diff! actual
+end
+
 When "I close the modal window" do
   find(".dsml-modal-close").click
+  sleep 0.3 # wait for css animation
 end
 

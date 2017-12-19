@@ -32,7 +32,8 @@ Feature: Use media library in forms
       | example.jpg     |
 
     When I choose "example.jpg"
-    Then I should see "example.jpg"
+    Then I should see the following "Cat picture" media library items:
+      | example.jpg |
 
     # state persists when reopening
     When I open the media library for the "Cat picture"
@@ -40,12 +41,14 @@ Feature: Use media library in forms
 
     # state persists after closing again
     When I close the modal window
-    Then I should see "example.jpg"
+    Then I should see the following "Cat picture" media library items:
+      | example.jpg |
 
     # state persists after saving
     When I press "Save"
     Then I should see "WIDGET UPDATED"
-    Then I should see "example.jpg"
+    And I should see the following "Cat picture" media library items:
+      | example.jpg |
 
     # state persists when opening after save
     When I open the media library for the "Cat picture"
@@ -62,8 +65,9 @@ Feature: Use media library in forms
     And I check "example.jpg"
     And I check "example.mp4"
     And I close the modal window
-    Then I should see "example.jpg"
-    And I should see "example.mp4"
+    Then I should see the following "Dog pictures" media library items:
+      | example.mp4 |
+      | example.jpg |
 
     # state persists when reopening
     When I open the media library for the "Dog pictures"
@@ -73,14 +77,16 @@ Feature: Use media library in forms
 
     # state persists after closing again
     When I close the modal window
-    Then I should see "example.jpg"
-    And I should see "example.mp4"
+    Then I should see the following "Dog pictures" media library items:
+      | example.mp4 |
+      | example.jpg |
 
     # state persists after saving
     When I press "Save"
     Then I should see "WIDGET UPDATED"
-    And I should see "example.jpg"
-    And I should see "example.mp4"
+    Then I should see the following "Dog pictures" media library items:
+      | example.mp4 |
+      | example.jpg |
 
     # state persists when opening after save
     When I open the media library for the "Dog pictures"
@@ -114,8 +120,9 @@ Feature: Use media library in forms
     And I press "Save"
 
     Then I should see "WIDGET UPDATED"
-    And I should see "example.jpg"
-    And I should see "example.mp4"
+    Then I should see the following "Embarassing pictures" media library items:
+      | example.mp4 |
+      | example.jpg |
     And I should see "Embarassing picture 1 context" filled in with "Highschool"
     And I should see "Embarassing picture 2 context" filled in with "College"
 
