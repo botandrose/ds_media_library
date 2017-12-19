@@ -42,7 +42,7 @@ InMemoryResolver.store["application/show"] = <<-SLIM
   = form_for @widget, url: "/" do |form|
     .field
       = form.label :cat_picture, class: "dsml-label"
-      = form.media_library :cat_picture
+      = form.media_library :cat_picture, optional: true
 
     .field
       = form.label :dog_pictures, class: "dsml-label"
