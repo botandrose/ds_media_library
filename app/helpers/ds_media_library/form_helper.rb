@@ -39,14 +39,6 @@ module DSMediaLibrary
         end
       end
 
-      def remove_field_name
-        if multiple
-          :"remove_#{single_field}_ids"
-        else
-          :"remove_#{field}"
-        end
-      end
-
       def field_id_name
         if multiple
           :"#{single_field}_ids"

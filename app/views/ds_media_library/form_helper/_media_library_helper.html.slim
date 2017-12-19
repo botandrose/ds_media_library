@@ -32,10 +32,9 @@
             span Remove #{helper.label.downcase.singularize} {{index}}
 
         - else
-          = form.hidden_field helper.field_id_name, value: "{{id}}"
+          = form.check_box helper.field_id_name, { checked: true }, "{{id}}", ""
           - if helper.optional
-            = form.check_box helper.remove_field_name
-            = form.label helper.remove_field_name do
+            = form.label helper.field_id_name do
               span Remove #{helper.label.downcase}
 
         = yield if block_given?
