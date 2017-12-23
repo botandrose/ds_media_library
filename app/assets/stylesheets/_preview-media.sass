@@ -19,10 +19,14 @@
     position: absolute
     opacity: 0.001
     &:checked
-      & + label, & + label:hover
-        background: $red
+      & + label
+        background:  rgba(#fff, 0.5)
         &:before
-          color: #fff
+          color:  rgba(#000, 0.8)
+        &:hover
+          background: rgba(#fff, 0.6)
+          &:before
+            color: #000
     & + label
       @extend .fa-trash
       cursor: pointer
@@ -32,7 +36,7 @@
       margin: 0
       box-shadow: #333 0 0 2px
       border-radius: 2px
-      background: rgba(#fff, 0.5)
+      background: $red
       text-align: center
       font-size: 1.4em
       position: absolute
@@ -41,11 +45,8 @@
       &:before
         @extend .fa
         display: inline-block
-        color: rgba(#000, 0.8)
-      &:hover
-        background: rgba(#fff, 0.6)
-        &:before
-          color: #000
+        color: #fff
+
   span
     color: transparent
     display: inline-block
