@@ -19,7 +19,7 @@ module DSMediaLibrary
         belongs_to :folder, class_name: "DSMediaLibrary::Folder", required: false
 
         def css_class
-          "media-link"
+          "dsml-media-link"
         end
       end
     end
