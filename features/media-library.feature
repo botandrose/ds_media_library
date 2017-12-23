@@ -40,7 +40,7 @@ Feature: Use media library in forms
     Then I should see "example.jpg" checked
 
     # state persists after closing again
-    When I close the modal window
+    When I close the media library
     Then I should see the following "Cat picture" media library items:
       | example.jpg |
 
@@ -64,7 +64,7 @@ Feature: Use media library in forms
     When I check "Example folder"
     And I check "example.jpg"
     And I check "example.mp4"
-    And I close the modal window
+    And I close the media library
     Then I should see the following "Dog pictures" media library items:
       | example.mp4 |
       | example.jpg |
@@ -76,7 +76,7 @@ Feature: Use media library in forms
     And I should see "example.mp4" checked
 
     # state persists after closing again
-    When I close the modal window
+    When I close the media library
     Then I should see the following "Dog pictures" media library items:
       | example.mp4 |
       | example.jpg |
@@ -113,7 +113,7 @@ Feature: Use media library in forms
     And I check "example.jpg"
     And I check "Example folder"
     And I check "example.mp4"
-    And I close the modal window
+    And I close the media library
 
     When I fill in "Embarassing picture 1 context" with "Highschool"
     And I fill in "Embarassing picture 2 context" with "College"
