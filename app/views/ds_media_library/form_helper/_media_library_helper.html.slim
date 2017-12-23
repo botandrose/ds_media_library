@@ -15,8 +15,9 @@
       label.dsml-modal-close for=helper.html_id
         .borders
       .media-wrapper data-load-url=ds_media_library.folders_path(helper.to_h)
+        p Loading...
         - helper.selected_resources.each do |resource|
-          input name="ds_media_library" type="checkbox" value=resource.id checked=true data=resource.attributes
+          input.hidden name="ds_media_library" type="checkbox" value=resource.id checked=true data=resource.attributes
 
   dl.dsml-playlist-media id="dsml-selected-media-#{helper.html_id}"
 
