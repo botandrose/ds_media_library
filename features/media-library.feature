@@ -94,6 +94,44 @@ Feature: Use media library in forms
     Then I should see "example.jpg" checked
     And I should see "example.mp4" checked
 
+  Scenario: Assigning an item to an existing singular media library field replaces the original
+    When I attach the "cat.jpg" file to "Cat picture"
+    And I press "Save"
+    Then I should see "WIDGET UPDATED"
+    And I should see "cat.jpg" as the "Cat picture" media
+
+    When I attach the "example.jpg" file to "Cat picture"
+    And I press "Save"
+    Then I should see "WIDGET UPDATED"
+    And I should see "example.jpg" as the "Cat picture" media
+
+    When I open the media library for the "Cat picture"
+    And I choose "cat.jpg"
+    And I press "Save"
+    Then I should see "WIDGET UPDATED"
+    And I should see "cat.jpg" as the "Cat picture" media
+
+  Scenario: Uploading files to an existing multiple media library field appends to the original
+    When I attach the following files to "Dog pictures":
+      | example.jpg |
+      | example.mp4 |
+    And I press "Save"
+    Then I should see "WIDGET UPDATED"
+    And I should see the following "Dog pictures" media library items:
+      | example.jpg |
+      | example.mp4 |
+
+    When I attach the following files to "Dog pictures":
+      | NEW.jpg  |
+      | EDIT.jpg |
+    And I press "Save"
+    Then I should see "WIDGET UPDATED"
+    And I should see the following "Dog pictures" media library items:
+      | example.jpg |
+      | example.mp4 |
+      | NEW.jpg     |
+      | EDIT.jpg    |
+
   Scenario: Media library form helper can accept a block
     When I follow "Widget"
     Then I should not see "Baby name"

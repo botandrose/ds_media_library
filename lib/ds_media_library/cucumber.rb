@@ -22,16 +22,29 @@ When "I close the media library" do
   sleep 0.3 # wait for css animation
 end
 
-Then /^I should see "(.+?)" as the "(.+?)" media$/ do |value, field|
-  field = find_field(field)
+When /^I mark the "(.+?)" "(.+?)" media item for removal$/ do |label, value|
+  field = find_field(label)
+  within field.find(:xpath, "..").first("dl dfn", text: value) do
+    uncheck "Remove #{label.singularize.downcase}"
+  end
+end
+
+Then /^I should see "(.+?)" as the "(.+?)" media$/ do |value, label|
+  field = find_field(label)
   actual = field.find(:xpath, "..").all("dl dt").map(&:text).join(", ")
   expect(actual).to eq(value)
 end
 
-Then /^I should see the following "(.+?)" media library items:$/ do |field, table|
-  field = find_field(field)
+Then /^I should see the following "(.+?)" media library items:$/ do |label, table|
+  field = find_field(label)
   actual = field.find(:xpath, "..").all("dl dt").map { |dt| [dt.text] }
   table.diff! actual
+end
+
+Then /^I should see no "(.+?)" media$/ do |label|
+  field = find_field(label)
+  actual = field.find(:xpath, "..").all("dl dt").map(&:text)
+  expect(actual).to eq([])
 end
 
 Then "I should see the following media tree:" do |table|

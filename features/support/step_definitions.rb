@@ -43,6 +43,13 @@ When "I attach the {string} file to {string}" do |path, field|
   attach_file field, "features/support/fixtures/#{path}"
 end
 
+When "I attach the following files to {string}:" do |field, table|
+  files = table.raw.map do |row|
+    "features/support/fixtures/#{row.first}"
+  end
+  attach_file field, files
+end
+
 When "I follow {string} within the {string} file/folder" do |link, context|
   within "li", text: context do
     click_link link
