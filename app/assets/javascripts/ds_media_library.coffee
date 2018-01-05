@@ -86,7 +86,7 @@ $ ->
         $(this).toggle isFound
 
       $tree.find(folderSelector).each ->
-        hasFoundResource = $(this).parent().find(resourceSelector).length > 0
+        hasFoundResource = $(this).parent().find(resourceSelector + ":visible").length > 0
         $(this).parent().toggle hasFoundResource
 
     else
