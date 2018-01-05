@@ -81,8 +81,11 @@ $ ->
       $tree.find(folderSelector).prop checked: true
 
       $tree.find(resourceSelector).each ->
-        labelText = $(this).find("label").text().toLowerCase()
-        isFound = labelText.indexOf(term) != -1
+        searchText = $(this).attr("data-dsml-search-text").toLowerCase()
+        isFound = searchText.indexOf(term) != -1
+        console.log searchText
+        console.log term
+        console.log isFound
         $(this).toggle isFound
 
       $tree.find(folderSelector).each ->
