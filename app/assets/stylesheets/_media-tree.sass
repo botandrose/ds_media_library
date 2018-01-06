@@ -1,5 +1,29 @@
 $itemHeight: 40px
 
+.dsml-media-nav-header
+  display: flex
+  justify-content: flex-end
+  .dsml-media-file-col
+    padding: 0
+
+.dsml-media-type-col, .dsml-media-date-col
+  font-size: 0.9em
+  color: #b0b0b0
+  margin: 0 0px 0 10px
+.dsml-media-type-col
+  flex: 0 0 120px
+.dsml-media-date-col
+  flex: 0 0 120px
+  margin: 0 90px 0 10px
+
+.dsml-resource
+  .dsml-expand-label
+    max-width: calc(100% - 350px)
+    overflow: hidden
+    white-space: nowrap
+  .dsml-media-date-col
+    margin-right: 0
+
 .dsml-media-nav
   @extend %dsml-reset-list
   width: 100%
@@ -17,7 +41,7 @@ $itemHeight: 40px
   width: 100%
   border: 1px solid #e0e0e0
   line-height: $itemHeight
-  flex-wrap: wrap
+  //flex-wrap: wrap
   padding: 0 10px
   .dsml-expand-label, .dsml-media-links
     display: inline-block

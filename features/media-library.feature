@@ -1,5 +1,6 @@
 Feature: Use media library in forms
   Background:
+    Given today is "2017-01-01"
     Given the following media folders exist:
       | name           | parent_folder  |
       | Example folder |                |
@@ -12,6 +13,7 @@ Feature: Use media library in forms
     Given I am on the homepage
 
   Scenario: Added media files show in root library
+    Given today is "2017-02-02"
     When I attach the "cat.jpg" file to "Cat picture"
     And I press "Save"
     Then I should see "WIDGET UPDATED"
@@ -19,17 +21,17 @@ Feature: Use media library in forms
     When I follow "Manage Media Library"
 
     Then I should see the following media tree:
-      | Another folder  |
-      | Example folder  |
-      | cat.jpg         |
-      | example.jpg     |
+      | Another folder  |         |            |
+      | Example folder  |         |            |
+      | cat.jpg         | Image   | 2017-02-02 |
+      | example.jpg     | Image   | 2017-01-01 |
 
   Scenario: Use media library to attach media
     When I open the media library for the "Cat picture"
     Then I should see the following media tree:
-      | Another folder  |
-      | Example folder  |
-      | example.jpg     |
+      | Another folder  |         |            |
+      | Example folder  |         |            |
+      | example.jpg     | Image   | 2017-01-01 |
 
     When I choose "example.jpg"
     Then I should see the following "Cat picture" media library items:
@@ -57,9 +59,9 @@ Feature: Use media library in forms
   Scenario: Use media library to select multiple media
     When I open the media library for the "Dog pictures"
     Then I should see the following media tree:
-      | Another folder  |
-      | Example folder  |
-      | example.jpg     |
+      | Another folder  |         |            |
+      | Example folder  |         |            |
+      | example.jpg     | Image   | 2017-01-01 |
 
     When I check "Example folder"
     And I check "example.jpg"
@@ -176,30 +178,35 @@ Feature: Use media library in forms
 
     When I follow "Manage Media Library"
     Then I should see the following media tree:
-      | Another folder  |
-      | Example folder  |
-      | cat.jpg         |
-      | example.jpg     |
+      | Another folder  |         |            |
+      | Example folder  |         |            |
+      | cat.jpg         | Image   | 2017-02-02 |
+      | example.jpg     | Image   | 2017-01-01 |
 
   Scenario: Open all folders
     When I open the media library for the "Cat picture"
     And I follow "Open all folders"
     Then I should see the following media tree:
-      | Another folder  |
-      | Example folder  |
-      | - example.mp4   |
-      | example.jpg     |
+      | Another folder  |         |            |
+      | Example folder  |         |            |
+      | - example.mp4   | Video   | 2017-01-01 |
+      | example.jpg     | Image   | 2017-01-01 |
 
   Scenario: Search media (case-insensitive)
     When I open the media library for the "Cat picture"
     And I fill in "Search media library" with "Mp4"
     Then I should see the following media tree:
-      | Example folder  |
-      | - example.mp4   |
+      | Example folder  |         |            |
+      | - example.mp4   | Video   | 2017-01-01 |
+
+    When I fill in "Search media library" with "video"
+    Then I should see the following media tree:
+      | Example folder  |         |            |
+      | - example.mp4   | Video   | 2017-01-01 |
 
     When I clear the "Search media library" field
     Then I should see the following media tree:
-      | Another folder  |
-      | Example folder  |
-      | example.jpg     |
+      | Another folder  |         |            |
+      | Example folder  |         |            |
+      | example.jpg     | Image   | 2017-01-01 |
 
