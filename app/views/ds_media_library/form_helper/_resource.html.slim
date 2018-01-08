@@ -3,4 +3,6 @@ li.dsml-resource class=("hidden" if resource.hidden?) data-dsml-search-text=reso
     label.dsml-expand-label
       input.dsml-modal-input.media-choice name="ds_media_library" type=helper.field_type value=resource.id checked=helper.ids.include?(resource.id) data=resource.attributes
       span.dsml-media-link alt=resource.original_file_name = resource.original_file_name
+    .dsml-media-type-col = resource.type_name
+    .dsml-media-date-col = resource.updated_on
 

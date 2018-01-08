@@ -180,7 +180,7 @@ Feature: Use media library in forms
     Then I should see the following media tree:
       | Another folder  |         |            |
       | Example folder  |         |            |
-      | cat.jpg         | Image   | 2017-02-02 |
+      | cat.jpg         | Image   | 2017-01-01 |
       | example.jpg     | Image   | 2017-01-01 |
 
   Scenario: Open all folders

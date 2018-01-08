@@ -21,6 +21,20 @@ module DSMediaLibrary
         def css_class
           "dsml-media-link"
         end
+
+        def type_name
+          case media_type
+          when "i" then "Image"
+          when "v" then "Video"
+          when "a" then "Audio"
+          when "p" then "PDF"
+          else "Unknown"
+          end
+        end
+
+        def updated_on
+          updated_at.try(:to_date)
+        end
       end
     end
 

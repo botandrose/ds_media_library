@@ -51,7 +51,12 @@ Then "I should see the following media tree:" do |table|
   def recurse_tree root, structure = [], prefix = ""
     root.all(:xpath, "./li").each do |li|
       if label = li.first("label")
-        structure << [prefix + label.text]
+        type_name, created_at = if label[:class].include?("folder")
+           2.times.map { "" }
+        else
+          li.all("div")[1..2].map(&:text)
+        end
+        structure << [prefix + label.text, type_name, created_at]
       end
       if root = li.first("ul")
         new_prefix = prefix.empty? ? "- #{prefix}" : prefix + "  "

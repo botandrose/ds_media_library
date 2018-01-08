@@ -31,6 +31,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "phantomjs"
   spec.add_development_dependency "capybara-screenshot"
   spec.add_development_dependency "database_cleaner"
+  spec.add_development_dependency "timecop"
   spec.add_development_dependency "byebug"
 
   spec.add_dependency "rails"

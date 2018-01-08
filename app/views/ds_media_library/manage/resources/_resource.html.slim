@@ -4,10 +4,8 @@ li.dsml-resource class=("hidden" if resource.hidden?) data-dsml-search-text=reso
     label.dsml-expand-label for="media-#{resource.id}"
       = link_to resource.original_file_name, edit_resource_path(resource), class: resource.css_class, alt: resource.original_file_name
       span.dsml-move-span.dsml-media-link alt=resource.original_file_name = resource.original_file_name
-    .dsml-media-type-col
-      /= media.type_name
-    .dsml-media-date-col
-      /= media.updated_on
+    .dsml-media-type-col = resource.type_name
+    .dsml-media-date-col = resource.updated_on
     .dsml-media-links
       = link_to "Edit media", edit_resource_path(resource), class: "dsml-edit-icon", title: "Edit media"
       = link_to "Delete media", resource_path(resource), method: :delete, class: "dsml-delete-icon", title: "Delete media",

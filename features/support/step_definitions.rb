@@ -1,7 +1,16 @@
 require "ds_media_library/cucumber"
+require "timecop"
 
 Given "I am on the homepage" do
   visit "/"
+end
+
+Given "today is {string}" do |time|
+  Timecop.freeze time
+end
+
+After do |scenario|
+  Timecop.return
 end
 
 When "I follow {string}" do |link|
