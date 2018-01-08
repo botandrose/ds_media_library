@@ -1,4 +1,4 @@
-li.dsml-resource class=("hidden" if resource.hidden?) data-dsml-search-text=resource.original_file_name
+li.dsml-resource class=("hidden" if resource.hidden?) data-dsml-search-text=[resource.original_file_name, resource.type_name, resource.updated_on].join(" ")
   .dsml-media-container
     input.dsml-move-input type="checkbox" name="resource_ids[]" id="media-#{resource.id}" value=resource.id
     label.dsml-expand-label for="media-#{resource.id}"

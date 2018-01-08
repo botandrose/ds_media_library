@@ -1,4 +1,4 @@
-li.dsml-resource class=("hidden" if resource.hidden?) data-dsml-search-text=resource.original_file_name
+li.dsml-resource class=("hidden" if resource.hidden?) data-dsml-search-text=[resource.original_file_name, resource.type_name, resource.updated_on].join(" ")
   .dsml-media-container
     label.dsml-expand-label
       input.dsml-modal-input.media-choice name="ds_media_library" type=helper.field_type value=resource.id checked=helper.ids.include?(resource.id) data=resource.attributes
