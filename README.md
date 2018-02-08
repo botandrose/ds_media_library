@@ -45,7 +45,13 @@ class Widget < ActiveRecord::Base
 end
 ```
 
-4. Use the `#media_library` form helper where you would normally use the `#file_field` form helper:
+4. Install and run the migrations
+```
+rails ds_media_library:migrations:install
+rails db:migrate
+```
+
+5. Use the `#media_library` form helper where you would normally use the `#file_field` form helper:
 ```slim
 / app/views/widgets/form.html.slim
 = form_for @widget do |form|
@@ -56,7 +62,7 @@ end
   = form.media_library :dog_pictures, multiple: true
 ```
 
-5. Profit!
+6. Profit!
 
 ## Development
 
