@@ -6,12 +6,15 @@
       - if preview
         - if image.video?
           = video_tag image.url, controls: true
-        - else
+        - if image.image?
           = image_tag image.url
 
       = yield
 
       - unless defined?(hide_file_name) && hide_file_name
         dt
-          figcaption = image.original_file_name
+          - if image.pdf?
+            figcaption = link_to image.original_file_name, image.url, class: "dsml-pdf-icon", target: "_blank"
+          - else
+            figcaption = image.original_file_name
 
