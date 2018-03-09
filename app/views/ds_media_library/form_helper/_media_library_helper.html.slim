@@ -41,6 +41,9 @@
         = yield if block_given?
 
         dt
+          // MICAH - if image.pdf?
+          figcaption
+            = link_to "resource orig name", "", class: "dsml-pdf-icon", target: "_blank"
+          // - else
           figcaption
             | {{resourcesoriginalfilename}}
-
