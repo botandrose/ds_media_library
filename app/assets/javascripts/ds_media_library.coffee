@@ -1,6 +1,7 @@
 #= require jquery
 #= require jquery_ujs
 #= require jquery-ui/widgets/sortable
+#= require ds_media_library/handlebars
 
 $ ->
   $("[data-media-library]").each ->
@@ -40,9 +41,13 @@ class MediaLibrary
   createContext: (resource, index) ->
     context = @extractContext(resource)
     context.index = index + 1
-    context.type = if context.resourcestype == "v" then "video" else "img"
     context.url = "/assets/" + context.resourcespath + context.resourcesfilename
     context.id = parseInt($(resource).attr("value"))
+    context.type = switch context.resourcestype
+      when "v" then "video"
+      when "p" then "pdf"
+      else "img"
+    context.isPdf = context.type == "pdf"
     context
 
   extractContext: (resource) ->
@@ -59,10 +64,7 @@ class MediaLibrary
       1
 
   renderTemplate: (context) ->
-    template = @template
-    for key, value of context
-      template = template.replace ///{{#{key}}}///g, value
-    template
+    Handlebars.compile(@template)(context)
 
 $ ->
   $("body").on "click", "[data-dsml-toggle-all-checkboxes]", (event) ->

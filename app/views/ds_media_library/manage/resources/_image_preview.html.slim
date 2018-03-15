@@ -13,8 +13,9 @@
 
       - unless defined?(hide_file_name) && hide_file_name
         dt
-          - if image.pdf?
-            figcaption = link_to image.original_file_name, image.url, class: "dsml-pdf-icon", target: "_blank"
-          - else
-            figcaption = image.original_file_name
+          figcaption
+            - if image.pdf?
+              = link_to image.original_file_name, image.url, class: "dsml-pdf-icon", target: "_blank"
+            - else
+              = image.original_file_name
 
