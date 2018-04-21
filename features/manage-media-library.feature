@@ -137,6 +137,13 @@ Feature: Manage media library
       | Another folder  |
       | Example folder  |
 
+  # Scenario: Deleted media is removed from search results
+    When I fill in "Search media library" with "example"
+    Then I should see the following media tree:
+      | Example folder  |
+      | - example.mp4   |
+
+  # Scenario: Deleted media is not removed from usage
     When I follow "Widget"
     Then I should see "example.jpg"
 

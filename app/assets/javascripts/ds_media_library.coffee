@@ -82,7 +82,7 @@ $ ->
     if term.length > 0
       $tree.find(folderSelector).prop checked: true
 
-      $tree.find(resourceSelector).each ->
+      $tree.find(resourceSelector).not(".hidden").each ->
         searchText = $(this).attr("data-dsml-search-text").toLowerCase()
         isFound = searchText.indexOf(term) != -1
         $(this).toggle isFound
@@ -93,5 +93,5 @@ $ ->
 
     else
       $tree.find(folderSelector).prop checked: false
-      $tree.find("li").show()
+      $tree.find("li").not(".hidden").show()
 
