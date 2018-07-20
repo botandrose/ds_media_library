@@ -47,7 +47,7 @@ end
 
 4. Install and run the migrations
 ```
-rails ds_media_library:migrations:install
+rails ds_media_library:install:migrations
 rails db:migrate
 ```
 
