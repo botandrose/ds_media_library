@@ -257,7 +257,6 @@ DEPENDENCIES
   appraisal
   bundler (~> 1.14)
   byebug
-  capybara (~> 3.0)
   capybara-screenshot
   chop
   cucumber-rails
@@ -265,6 +264,7 @@ DEPENDENCIES
   ds_media_library!
   phantomjs
   poltergeist
+  rails (~> 5.2.0)
   rake (~> 10.0)
   rspec (~> 3.0)
   sqlite3
