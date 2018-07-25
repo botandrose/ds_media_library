@@ -1,10 +1,19 @@
 sudo: false
 language: ruby
+
 rvm:
   - 2.2
-cache: bundler
+  - 2.3
+  - 2.4
+
+gemfile:
+  - gemfiles/capybara_2.gemfile
+  - gemfiles/capybara_3.gemfile
+
 addons:
   apt:
     packages:
       - mplayer
+
+cache: bundler
 
