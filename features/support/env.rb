@@ -14,4 +14,5 @@ Capybara.default_driver = :poltergeist
 
 require './dummy/app'
 Capybara.app = Dummy::App
+Capybara.server = :webrick
 require "cucumber/rails/capybara"
