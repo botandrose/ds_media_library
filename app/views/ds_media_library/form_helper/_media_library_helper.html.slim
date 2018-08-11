@@ -28,6 +28,7 @@
           | <{{type}} src="{{url}}" controls=true />
 
         - if helper.multiple
+          = form.hidden_field helper.field_id_name, multiple: true, value: nil
           = form.check_box helper.field_id_name, { multiple: true, checked: true, id: "#{helper.field_id_name}_{{id}}" }, "{{id}}", nil
           label for="#{helper.field_id_name}_{{id}}"
             span Remove #{helper.label.downcase.singularize} {{index}}
