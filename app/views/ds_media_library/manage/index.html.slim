@@ -9,7 +9,7 @@
       .dsml-buttons-left
         = link_to "Open all folders", "#", class: "dsml-open-all-label", data: { "dsml-toggle-all-checkboxes" => ".dsml-expand-input" }
         label.dsml-select-media-button for="dsml-select-media" Select multiple media
-        .field.dsml-move-selected
+        .field.dsml-selected-options
           label.dsml-move-selected-label for="dsml-folder-id" Move selected to:
           select#dsml-folder-id name="folder_id"
             - folders.each do |folder|
@@ -17,6 +17,8 @@
                 = "- " * folder.depth
                 = folder.name
           button.dsml-move-button Move
+          em or
+          button.dsml-delete-multiple name="_method" value="delete" Delete all selected
 
       .dsml-buttons-right
         = link_to "Add new folder", [:new, :folder], class: "dsml-add-button"

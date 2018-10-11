@@ -109,6 +109,22 @@ Feature: Manage media library
       | - example.mp4   |
       | Example folder  |
 
+  Scenario: Batch delete media
+    When I check "Select multiple media"
+    And I check "Example folder"
+    And I check "example.mp4"
+    And I check "example.jpg"
+
+    And I press "Delete all selected"
+
+    Then I should see "MEDIA DELETED"
+
+    When I check "Example folder"
+    And I check "Another folder"
+    Then I should see the following media tree:
+      | Another folder  |
+      | Example folder  |
+
   Scenario: Search media (case-insensitive)
     When I fill in "Search media library" with "Mp4"
     Then I should see the following media tree:

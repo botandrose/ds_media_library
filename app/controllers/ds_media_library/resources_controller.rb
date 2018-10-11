@@ -30,7 +30,7 @@ module DSMediaLibrary
     end
 
     def destroy
-      resource.update! hidden: true
+      DSNode::Resource.where(resourcesid: params[:resource_ids]).update hidden: true
       redirect_to :resources, notice: "Media deleted"
     end
 

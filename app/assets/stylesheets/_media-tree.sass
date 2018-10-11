@@ -147,7 +147,7 @@ $itemHeight: 40px
         color: #fff
         @extend .fa-check
 
-.dsml-move-selected
+.dsml-selected-options
   display: none
   vertical-align: top
   float: none
@@ -159,12 +159,15 @@ $itemHeight: 40px
     margin: 0
     vertical-align: middle
     font-size: 1.3em
-
-.dsml-move-selected-label
-  color: #444
-  font-size: 1.3em
-  vertical-align: middle
-  margin: 0 10px 0 0
+  em
+    display: inline-block
+    margin: 0 10px
+    font-size: 1.3em
+  label
+    color: #444
+    font-size: 1.3em
+    vertical-align: middle
+    margin: 0 10px 0 0
 
 #dsml-select-media
   position: absolute
@@ -176,7 +179,7 @@ $itemHeight: 40px
       .dsml-select-media-button
         +dsml-button($primaryColor, #fff, 1.1em, true, "check")
         margin-right: 10px
-      .dsml-move-selected
+      .dsml-selected-options
         display: inline-block
 
 #dsml-select-media
@@ -195,14 +198,15 @@ $itemHeight: 40px
   +dsml-button(#fcfcfc, #444, 1.1em, true, "check")
 
 .dsml-move-button
-  +dsml-icon("arrow-circle-right")
-  border: none
-  background: none
-  font-size: 2.2em
-  margin-left: 6px
-  cursor: pointer
-  vertical-align: middle
+  +dsml-button(#fff, #333, 1.2em, true, "arrow-circle-right")
+  line-height: 1.75em
+  margin-left: 10px
+  font-family: $default
 
+.dsml-delete-multiple
+  +dsml-button(#fff, #333, 1.2em, true, "trash")
+  line-height: 1.75em
+  font-family: $default
 
 // ICONS
 
