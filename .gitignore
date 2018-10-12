@@ -1,6 +1,7 @@
 .bundle
 /.yardoc
 /_yardoc/
+
 /coverage/
 /doc/
 /pkg/
@@ -11,3 +12,7 @@
 
 # rspec failure tracking
 .rspec_status
+
+# ignore latest gemfile lock so that travis always tests newest gems
+/gemfiles/latest.gemfile.lock
+
