@@ -16,6 +16,7 @@ gemfile:
   - gemfiles/latest.gemfile
 
 addons:
+  chrome: stable
   apt:
     packages:
       - mplayer
