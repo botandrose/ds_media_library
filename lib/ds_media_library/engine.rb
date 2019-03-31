@@ -1,6 +1,6 @@
 require "ds_node"
 require "slim"
-require "sass-rails"
+require "sassc-rails"
 require "font-awesome-rails"
 require "jquery-rails"
 require "jquery-ui-rails"
