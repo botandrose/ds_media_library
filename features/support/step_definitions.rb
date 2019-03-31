@@ -17,6 +17,10 @@ When "I follow {string}" do |link|
   click_link link
 end
 
+When "I follow and confirm {string}" do |link|
+  accept_confirm { click_link link }
+end
+
 When "I check {string}" do |field|
   check field
 end
@@ -40,6 +44,10 @@ When "I press {string}" do |button|
   click_button button
 end
 
+When "I press and confirm {string}" do |button|
+  accept_confirm { click_button button } 
+end
+
 Then "I should see {string}" do |text|
   expect(page).to have_text(text)
 end
@@ -49,12 +57,12 @@ Then "I should not see {string}" do |text|
 end
 
 When "I attach the {string} file to {string}" do |path, field|
-  attach_file field, "features/support/fixtures/#{path}"
+  attach_file field, File.expand_path("features/support/fixtures/#{path}")
 end
 
 When "I attach the following files to {string}:" do |field, table|
   files = table.raw.map do |row|
-    "features/support/fixtures/#{row.first}"
+    File.expand_path("features/support/fixtures/#{row.first}")
   end
   attach_file field, files
 end
@@ -62,6 +70,12 @@ end
 When "I follow {string} within the {string} file/folder" do |link, context|
   within "li", text: context do
     click_link link
+  end
+end
+
+When "I follow and confirm {string} within the {string} file/folder" do |link, context|
+  within "li", text: context do
+    accept_confirm { click_link link }
   end
 end
 

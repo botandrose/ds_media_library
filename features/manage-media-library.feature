@@ -115,7 +115,7 @@ Feature: Manage media library
     And I check "example.mp4"
     And I check "example.jpg"
 
-    And I press "Delete all selected"
+    And I press and confirm "Delete all selected"
 
     Then I should see "MEDIA DELETED"
 
@@ -145,8 +145,7 @@ Feature: Manage media library
     Then I should see "WIDGET UPDATED"
 
     When I follow "Manage Media Library"
-    And I follow "Delete media" within the "example.jpg" file
-    # And I confirm deletion
+    And I follow and confirm "Delete media" within the "example.jpg" file
 
     Then I should see "MEDIA DELETED"
     And I should see the following media tree:
@@ -164,8 +163,7 @@ Feature: Manage media library
     Then I should see "example.jpg"
 
   Scenario: Delete empty folder
-    When I follow "Delete folder" within the "Another folder" folder
-    # And I confirm deletion
+    When I follow and confirm "Delete folder" within the "Another folder" folder
 
     Then I should see "FOLDER DELETED"
     And I should see the following media tree:
@@ -180,8 +178,7 @@ Feature: Manage media library
       | - example.mp4   |
       | example.jpg     |
 
-    When I follow "Delete folder" within the "Example folder" folder
-    # And I confirm deletion
+    When I follow and confirm "Delete folder" within the "Example folder" folder
 
     Then I should see "FOLDER DELETED"
     When I follow "Open all folders"
