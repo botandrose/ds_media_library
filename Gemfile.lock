@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ds_media_library (0.6.1)
+    ds_media_library (0.7.0)
       awesome_nested_set
       coffee-rails
       ds_node
