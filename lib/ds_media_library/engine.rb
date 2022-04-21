@@ -9,31 +9,35 @@ require "coffee-rails"
 module DSMediaLibrary
   class Engine < Rails::Engine
     initializer "ds_media_library.form_helper" do
-      ActionView::Helpers::FormBuilder.class_eval do
-        prepend FormHelper
+      config.after_initialize do
+        ActionView::Helpers::FormBuilder.class_eval do
+          prepend FormHelper
+        end
       end
     end
 
     initializer "ds_media_library.ds_node" do
-      DSNode::Resource.class_eval do
-        belongs_to :folder, class_name: "DSMediaLibrary::Folder", required: false
+      config.after_initialize do
+        DSNode::Resource.class_eval do
+          belongs_to :folder, class_name: "DSMediaLibrary::Folder", required: false
 
-        def css_class
-          "dsml-media-link"
-        end
-
-        def type_name
-          case media_type
-          when "i" then "Image"
-          when "v" then "Video"
-          when "a" then "Audio"
-          when "p" then "PDF"
-          else "Unknown"
+          def css_class
+            "dsml-media-link"
           end
-        end
 
-        def updated_on
-          updated_at.try(:to_date)
+          def type_name
+            case media_type
+            when "i" then "Image"
+            when "v" then "Video"
+            when "a" then "Audio"
+            when "p" then "PDF"
+            else "Unknown"
+            end
+          end
+
+          def updated_on
+            updated_at.try(:to_date)
+          end
         end
       end
     end
