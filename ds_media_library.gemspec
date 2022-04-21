@@ -22,19 +22,22 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler"
-  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "appraisal"
   spec.add_development_dependency "cucumber-rails"
   spec.add_development_dependency "chop"
   spec.add_development_dependency "sqlite3"
   spec.add_development_dependency "capybara-headless_chrome"
+  spec.add_development_dependency "webdrivers", "~>4.0"
+  spec.add_development_dependency "selenium-webdriver", "~>3.0"
   spec.add_development_dependency "capybara-screenshot"
   spec.add_development_dependency "database_cleaner"
   spec.add_development_dependency "timecop"
   spec.add_development_dependency "byebug"
 
   spec.add_dependency "rails"
+  spec.add_dependency "sprockets", "~>3.0"
   spec.add_dependency "slim"
   spec.add_dependency "ds_node"
   spec.add_dependency "awesome_nested_set"
