@@ -15,4 +15,5 @@
 
 # ignore latest gemfile lock so that travis always tests newest gems
 /gemfiles/latest.gemfile.lock
+/Gemfile.lock
 
